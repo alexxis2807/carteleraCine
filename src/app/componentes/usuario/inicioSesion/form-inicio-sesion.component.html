@@ -1,0 +1,31 @@
+<p>INICIO DE SESION</p>
+<form
+  [formGroup]="formInicio"
+  class="flex flex-col justify-between w-[350px] gap-5"
+>
+  <div class="flex justify-between items-center">
+    <label for="nombreUsuario">Nombre Usuario: </label>
+    <input
+      type="text"
+      id="nombreUsuario"
+      formControlName="nombreUsuario"
+      class="border border-cyan-900"
+    />
+  </div>
+  <div class="flex justify-between items-center">
+    <label for="contraseña">Contraseña: </label>
+    <input
+      type="password"
+      id="contraseña"
+      formControlName="contraseña"
+      class="border border-cyan-900"
+    />
+  </div>
+  <button (click)="inicioSesion()" class="border border-cyan-300 rounded w-20">
+    Aceptar
+  </button>
+</form>
+
+@if (error) {
+  <p>{{ error }}</p>
+}

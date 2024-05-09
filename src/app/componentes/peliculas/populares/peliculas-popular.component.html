@@ -1,0 +1,12 @@
+<div class="p-8 bg-color-secundario mb-5">
+  <h1 class="titulo-cabecera">PELICULAS POPULARES</h1>
+</div>
+<div class="flex flex-wrap justify-between">
+  @for (pelicula of peliculas; track pelicula.id) {
+    <app-pelicula
+      [tituloPelicula]="pelicula.title"
+      [urlPortadaPelicula]="pelicula.backdrop_path"
+      [idPelicula]="pelicula.id"
+    ></app-pelicula>
+  }
+</div>

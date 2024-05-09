@@ -1,0 +1,55 @@
+<form
+  [formGroup]="formUsuario"
+  class="flex flex-col justify-between w-[350px] gap-5"
+>
+  <div class="flex justify-between items-center">
+    <label for="nombreUsuario">Nombre Usuario: </label>
+    <input
+      type="text"
+      id="nombreUsuario"
+      formControlName="nombreUsuario"
+      class="border border-cyan-900"
+    />
+  </div>
+  <div class="flex justify-between items-center">
+    <label for="contraseña">Contraseña: </label>
+    <input
+      type="password"
+      id="contraseña"
+      formControlName="contraseña"
+      class="border border-cyan-900"
+    />
+  </div>
+  <div class="flex justify-between items-center">
+    <label for="repContraseña">Repetir contraseña: </label>
+    <input
+      type="password"
+      id="repContraseña"
+      formControlName="repContraseña"
+      class="border border-cyan-900"
+    />
+  </div>
+  <div class="flex justify-between items-center">
+    <label for="correo">Correo: </label>
+    <input
+      type="email"
+      id="correo"
+      formControlName="correo"
+      class="border border-cyan-900"
+    />
+  </div>
+  <div class="flex justify-center mt-5 gap-5">
+    <button
+      (click)="accionSubmit()"
+      class="border border-cyan-300 rounded w-20"
+    >
+      {{ textoSubmit }}
+    </button>
+    <button
+      (click)="accionVolver()"
+      class="border border-cyan-300 rounded w-20"
+    >
+      Volver
+    </button>
+  </div>
+</form>

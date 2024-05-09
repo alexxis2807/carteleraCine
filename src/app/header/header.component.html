@@ -1,0 +1,8 @@
+<div class="w-full bg-color-primario h-20 flex gap-10">
+  @if (haySesion) {
+    <button (click)="cerrarSesion()">Cerrar Sesion</button>
+  } @else {
+    <button routerLink="/inicioSesion">Inicio de sesion</button>
+    <button routerLink="/registro">Registrarse</button>
+  }
+</div>
