@@ -58,4 +58,16 @@ export class PeliculasService {
       },
     );
   }
+
+  public obtenerTrailerPelicula(idPelicula: number): Observable<string> {
+    return this.http
+      .get<string>(this.url + '/' + idPelicula + '/videos?language=es-ES', {
+        headers: this.headersAuthoritation,
+      })
+      .pipe(
+        map((response: any) => {
+          return response.results[0].key;
+        }),
+      );
+  }
 }

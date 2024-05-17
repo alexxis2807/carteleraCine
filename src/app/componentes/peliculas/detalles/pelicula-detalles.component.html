@@ -1,3 +1,40 @@
-<div class="bg-color-secundario">
-  <h1 class="titulo-cabecera">Pelicula {{ idPelicula }}</h1>
+<div class="bg-color-secundario flex">
+  <img src="{{ urlImagenes }}{{ detallesPelicula.poster_path }}" alt="" />
+  <div class="flex flex-col p-5">
+    <h1 class="titulo-cabecera">Pelicula {{ detallesPelicula.title }}</h1>
+
+    <div>
+      <p>{{ detallesPelicula.overview }}</p>
+      <div class="flex gap-5">
+        @for (genero of detallesPelicula.genres; track detallesPelicula.id) {
+          <p>{{ genero.name }}</p>
+        }
+        <p>{{ detallesPelicula.release_date }}</p>
+        <div>Valoración: {{ detallesPelicula.vote_average }}</div>
+        <div>Duración: {{ detallesPelicula.runtime }} min</div>
+      </div>
+      <!-- <div class="flex">
+        @for (
+          compania of detallesPelicula.production_companies;
+          track compania.id
+        ) {
+          @if (compania.logo_path != null) {
+            <img
+              class=""
+              src="{{ urlImagenes }}{{ compania.logo_path }}"
+              alt=""
+            />
+          }
+        }
+      </div> -->
+    </div>
+  </div>
 </div>
+
+<iframe
+  [src]="trailerUrl"
+  width="560"
+  height="315"
+  frameborder="0"
+  allowfullscreen
+></iframe>

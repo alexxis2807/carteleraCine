@@ -2,6 +2,9 @@
   class="flex flex-col items-center text-center bg-color-terciario border border-red-900 w-52 mb-10"
   routerLink="/peliculas/detalles/{{ idPelicula }}"
 >
-  <h3 class="min-h-16 flex items-center p-2">{{ tituloPelicula }}</h3>
-  <img class="w-52" src="{{ urlImagenes }}{{ urlPortadaPelicula }}" alt="" />
+  <h3 class="min-h-24 flex items-center p-2">{{ tituloPelicula }}</h3>
+  <div
+  class="w-52 h-80"
+  style="background-image: url('{{ urlImagenes }}{{urlPortadaPelicula}}'); background-size: cover; background-position: center;"
+></div>
 </div>

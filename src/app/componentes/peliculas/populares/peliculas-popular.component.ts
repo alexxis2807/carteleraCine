@@ -29,17 +29,8 @@ export class PeliculasPopularComponent implements OnInit {
     //Obtengo las peliculas de la pagina 1
     this.peliculaService.obtenerPeliculas(1).subscribe({
       next: (peliculasEncontrada) => {
-        peliculasEncontrada.map((pelicula) => {
-          this.peliculaService.obtenerPortadaPelicula(pelicula.id).subscribe({
-            next: (portada) => {
-              if (portada != undefined) {
-                pelicula.backdrop_path = portada;
-              }
-            },
-          });
-        });
         this.peliculas = peliculasEncontrada.filter(
-          (pelicula) => pelicula.backdrop_path != null,
+          (pelicula) => pelicula.poster_path != null,
         );
         console.log(this.peliculas);
       },

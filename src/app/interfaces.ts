@@ -8,10 +8,10 @@ export interface Usuario {
 }
 
 export interface Pelicula {
+  id: number;
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
-  id: number;
   original_language: string;
   original_title: string;
   overview: string;
@@ -22,4 +22,30 @@ export interface Pelicula {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  trailer_path: string;
+}
+
+export interface Genero {
+  id: number;
+  nombre: string;
+}
+
+export interface Peliculas {
+  id: number;
+  adulto: boolean;
+  rutaFondo?: string;
+  generos: Genero[];
+  idiomaOriginal: string;
+  tituloOriginal: string;
+  resumen: string;
+  estado: string;
+  duracion: number;
+  popularidad: number;
+  rutaPoster: string;
+  fechaEstreno: string;
+  titulo: string;
+  video: boolean;
+  promedioVotos: number;
+  votosTotales: number;
+  rutaTrailer: string;
 }
