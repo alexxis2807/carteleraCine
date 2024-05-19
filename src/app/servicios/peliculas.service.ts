@@ -27,7 +27,6 @@ export class PeliculasService {
         headers: this.headersAuthoritation,
       })
       .pipe(
-        // Utiliza map para transformar la respuesta y quedarte solo con el campo 'results'
         map((response) => response.results),
       );
   }

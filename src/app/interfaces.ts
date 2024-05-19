@@ -23,6 +23,7 @@ export interface Pelicula {
   vote_average: number;
   vote_count: number;
   trailer_path: string;
+  runtime: number;
 }
 
 export interface Genero {
