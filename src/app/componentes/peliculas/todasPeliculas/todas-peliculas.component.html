@@ -1,0 +1,12 @@
+<div class="p-8 bg-color-secundario mb-5">
+  <h1 class="titulo-cabecera">PELICULAS</h1>
+</div>
+<div class="flex flex-wrap justify-between">
+  @for (pelicula of peliculas; track pelicula.id) {
+    <app-pelicula
+      [idPelicula]="pelicula.id"
+      [tituloPelicula]="pelicula.titulo"
+      [urlPortadaPelicula]="pelicula.rutaPoster"
+    ></app-pelicula>
+  }
+</div>

@@ -7,6 +7,12 @@ export interface Usuario {
   fecha_modificacion: string;
 }
 
+export interface DetallePoster {
+  id: number;
+  titulo: string;
+  rutaPoster: string;
+}
+
 export interface Pelicula {
   id: number;
   adult: boolean;

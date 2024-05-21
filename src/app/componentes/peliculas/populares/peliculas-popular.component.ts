@@ -27,13 +27,13 @@ export class PeliculasPopularComponent implements OnInit {
     } */
 
     //Obtengo las peliculas de la pagina 1
-    this.peliculaService.obtenerPeliculas(1).subscribe({
+   /*  this.peliculaService.obtenerPeliculas(1).subscribe({
       next: (peliculasEncontrada) => {
         this.peliculas = peliculasEncontrada.filter(
           (pelicula) => pelicula.poster_path != null,
         );
         console.log(this.peliculas);
       },
-    });
+    }); */
   }
 }

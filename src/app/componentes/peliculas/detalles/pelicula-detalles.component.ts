@@ -32,16 +32,12 @@ export class PeliculaDetallesComponent implements OnInit {
         console.log(this.detallesPelicula);
       },
     });
-    this.obtenerURLSegura();
+    // this.obtenerURLSegura();
   }
 
-  obtenerURLSegura() {
-    this.peliculasServicio.obtenerTrailerPelicula(this.idPelicula).subscribe({
-      next: (idTrailer) => {
-        this.trailerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-          'https://www.youtube.com/embed/' + idTrailer,
-        );
-      },
-    });
-  }
+  /*  obtenerURLSegura() {
+    this.trailerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      'https://www.youtube.com/embed/' + this.detallesPelicula.rutaTrailer,
+    );
+  } */
 }
