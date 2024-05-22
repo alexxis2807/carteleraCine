@@ -17,6 +17,10 @@ export class PeliculasService {
     return this.http.get<Peliculas[]>(this.url + '/posters');
   }
 
+  public obtenerPosterPeliculasPopulares(): Observable<Peliculas[]> {
+    return this.http.get<Peliculas[]>(this.url + '/posters/populares');
+  }
+
   public obtenerDetallesPelicula(idPelicula: number): Observable<Peliculas> {
     return this.http.get<Peliculas>(this.url + '/detalles/' + idPelicula);
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PeliculasService } from '../../../servicios/peliculas.service';
-import { Pelicula } from '../../../interfaces';
+import { DetallePoster, Pelicula } from '../../../interfaces';
 import { Router } from '@angular/router';
 import { PeliculaComponent } from '../cartaPelicula/pelicula.component';
 
@@ -12,7 +12,7 @@ import { PeliculaComponent } from '../cartaPelicula/pelicula.component';
   imports: [PeliculaComponent],
 })
 export class PeliculasPopularComponent implements OnInit {
-  peliculas!: Pelicula[];
+  peliculas!: DetallePoster[];
 
   portadas = [];
 
@@ -26,14 +26,12 @@ export class PeliculasPopularComponent implements OnInit {
       this.router.navigateByUrl('/inicioSesion');
     } */
 
-    //Obtengo las peliculas de la pagina 1
-   /*  this.peliculaService.obtenerPeliculas(1).subscribe({
-      next: (peliculasEncontrada) => {
-        this.peliculas = peliculasEncontrada.filter(
-          (pelicula) => pelicula.poster_path != null,
-        );
+    //Obtengo las peliculas populares
+    this.peliculaService.obtenerPosterPeliculasPopulares().subscribe({
+      next: (peliculasEncontradas) => {
+        this.peliculas = peliculasEncontradas;
         console.log(this.peliculas);
       },
-    }); */
+    });
   }
 }

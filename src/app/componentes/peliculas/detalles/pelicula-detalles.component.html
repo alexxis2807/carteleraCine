@@ -1,7 +1,7 @@
 <div class="bg-color-secundario flex">
   <img src="{{ urlImagenes }}{{ detallesPelicula.rutaPoster }}" alt="" />
   <div class="flex flex-col p-5">
-    <h1 class="titulo-cabecera">Pelicula {{ detallesPelicula.titulo }}</h1>
+    <h1 class="titulo-cabecera">{{ detallesPelicula.titulo }}</h1>
 
     <div>
       <p>{{ detallesPelicula.resumen }}</p>
@@ -10,7 +10,7 @@
           <p>{{ genero.nombre }}</p>
         }
         <p>{{ detallesPelicula.fechaEstreno }}</p>
-        <div>Valoración: {{ detallesPelicula.valoracion }}</div>
+        <div>Valoración: {{ detallesPelicula.promedioVotos }}</div>
         <div>Duración: {{ detallesPelicula.duracion }} min</div>
       </div>
       <!-- <div class="flex">
@@ -31,10 +31,10 @@
   </div>
 </div>
 
-<!-- <iframe
+<iframe
   [src]="trailerUrl"
   width="560"
   height="315"
   frameborder="0"
   allowfullscreen
-></iframe> -->
+></iframe>

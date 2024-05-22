@@ -11,12 +11,11 @@ import { PeliculaComponent } from '../cartaPelicula/pelicula.component';
   styleUrl: './todas-peliculas.component.scss',
 })
 export class TodasPeliculasComponent implements OnInit {
-  peliculas!: any;
+  peliculas!: DetallePoster[];
   constructor(private peliculaService: PeliculasService) {}
   ngOnInit(): void {
     this.peliculaService.obtenerPosterPeliculas().subscribe({
       next: (pelis) => {
-        console.log(pelis);
         this.peliculas = pelis;
       },
     });

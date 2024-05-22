@@ -3,6 +3,7 @@ import { PeliculasService } from '../../../servicios/peliculas.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { environment } from '../../../../assets/environments';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Peliculas } from '../../../interfaces';
 
 @Component({
   selector: 'app-pelicula-detalles',
@@ -15,7 +16,7 @@ export class PeliculaDetallesComponent implements OnInit {
   urlImagenes = environment.urlApiImagenes;
 
   idPelicula!: number;
-  detallesPelicula: any;
+  detallesPelicula!: Peliculas;
   trailerUrl!: SafeResourceUrl;
 
   constructor(
@@ -29,15 +30,17 @@ export class PeliculaDetallesComponent implements OnInit {
     this.peliculasServicio.obtenerDetallesPelicula(this.idPelicula).subscribe({
       next: (detalles) => {
         this.detallesPelicula = detalles;
-        console.log(this.detallesPelicula);
+        console.log(this.detallesPelicula.rutaTrailer);
+      },
+      complete: () => {
+        this.obtenerURLSegura();
       },
     });
-    // this.obtenerURLSegura();
   }
 
-  /*  obtenerURLSegura() {
+  obtenerURLSegura() {
     this.trailerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
       'https://www.youtube.com/embed/' + this.detallesPelicula.rutaTrailer,
     );
-  } */
+  }
 }
