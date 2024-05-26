@@ -38,3 +38,25 @@
   frameborder="0"
   allowfullscreen
 ></iframe>
+
+<div class="overflow-x-auto flex w-full">
+  @for (fecha of fechasSesiones; track $index) {
+    <button
+      (click)="obtenerSesionesPorFecha(fecha, detallesPelicula.id)"
+      class="bg-cyan-400 border border-black min-w-40 h-20"
+    >
+      {{ fecha }}
+    </button>
+  }
+</div>
+@if (sesionesPorFecha) {
+  <div class="flex flex-col items-center">
+    <h1>ELIGE LA MEJOR HORA</h1>
+    <h1>Fecha: {{ fechaElegida }}</h1>
+    <div class="flex gap-10">
+      @for (sesion of sesionesPorFecha; track $index) {
+        <button class="w-40 h-20 bg-cyan-200">{{ sesion.horaInicio }}</button>
+      }
+    </div>
+  </div>
+}

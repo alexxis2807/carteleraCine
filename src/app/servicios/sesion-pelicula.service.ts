@@ -28,4 +28,19 @@ export class SesionPeliculaService {
 
     return this.http.post<SesionPelicula>(this.url + '/guardar', sesion);
   }
+
+  obtenerSesionesPeliculaFecha(
+    fecha: string,
+    idPelicula: number,
+  ): Observable<SesionPelicula[]> {
+    return this.http.get<SesionPelicula[]>(
+      this.url + '/fecha/' + fecha + '/id/' + idPelicula,
+    );
+  }
+
+  obtenerFechasSesionesPeliculas(
+    idPelicula: number,
+  ): Observable<string[]> {
+    return this.http.get<string[]>(this.url + '/id/' + idPelicula);
+  }
 }
