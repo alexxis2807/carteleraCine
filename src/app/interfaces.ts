@@ -56,3 +56,17 @@ export interface Peliculas {
   votosTotales: number;
   rutaTrailer: string;
 }
+
+export interface Sala {
+  id: number;
+  nombre: string;
+  capacidad: number;
+}
+
+export interface SesionPelicula {
+  pelicula: Peliculas;
+  sala: Sala;
+  fecha: string;
+  horaInicio: string;
+  horaFin: string;
+}

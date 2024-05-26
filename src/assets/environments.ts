@@ -1,6 +1,8 @@
 export const environment = {
   urlApiUsuarios: 'http://localhost:8080/usuarios',
   urlPeliculasBbdd: 'http://localhost:8080/peliculas',
+  urlSesionPeliculas: 'http://localhost:8080/sesion_pelicula',
+  urlSala: 'http://localhost:8080/sala',
 
   urlApiPeliculas: 'https://api.themoviedb.org/3/movie',
   urlApiPeliculasDiscover: 'https://api.themoviedb.org/3/discover/movie',

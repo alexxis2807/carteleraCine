@@ -12,7 +12,7 @@ export const routes: Routes = [
   { path: 'registro', component: RegistraUsuarioComponent },
   { path: 'inicioSesion', component: FormInicioSesionComponent },
   { path: 'peliculas/populares', component: PeliculasPopularComponent },
-  //{ path: 'peliculas/api', component: PeliculaApiComponent },
+  { path: 'peliculas/api', component: PeliculaApiComponent },
   { path: 'peliculas', component: TodasPeliculasComponent },
   {
     path: 'peliculas/detalles/:idPelicula',
