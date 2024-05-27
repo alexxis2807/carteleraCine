@@ -6,6 +6,7 @@ import { PeliculasPopularComponent } from './componentes/peliculas/populares/pel
 import { PeliculaDetallesComponent } from './componentes/peliculas/detalles/pelicula-detalles.component';
 import { PeliculaApiComponent } from './componentes/apiPeliculas/pelicula-api.component';
 import { TodasPeliculasComponent } from './componentes/peliculas/todasPeliculas/todas-peliculas.component';
+import { SesionPeliculaComponent } from './componentes/sesion/sesion-pelicula.component';
 
 export const routes: Routes = [
   { path: 'FormularioUsuario', component: FormUsuarioComponent },
@@ -18,4 +19,5 @@ export const routes: Routes = [
     path: 'peliculas/detalles/:idPelicula',
     component: PeliculaDetallesComponent,
   },
+  { path: 'reservaSesion/:idSesion', component: SesionPeliculaComponent },
 ];

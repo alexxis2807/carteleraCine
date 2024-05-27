@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../assets/environments';
-import { Peliculas, Sala, SesionPelicula } from '../interfaces';
+import {
+  Peliculas,
+  Sala,
+  SesionPelicula,
+  SesionPeliculaRequest,
+} from '../interfaces';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -17,16 +22,18 @@ export class SesionPeliculaService {
     fechaSesion: string,
     horaInicioSesion: string,
     horaFinSesion: string,
-  ): Observable<SesionPelicula> {
-    const sesion: SesionPelicula = {
+    precioSesion: number,
+  ): Observable<SesionPeliculaRequest> {
+    const sesion: SesionPeliculaRequest = {
       pelicula: peliculaSesion,
       sala: salaSesion,
       fecha: fechaSesion,
       horaInicio: horaInicioSesion,
       horaFin: horaFinSesion,
+      precio: precioSesion,
     };
 
-    return this.http.post<SesionPelicula>(this.url + '/guardar', sesion);
+    return this.http.post<SesionPeliculaRequest>(this.url + '/guardar', sesion);
   }
 
   obtenerSesionesPeliculaFecha(
@@ -38,9 +45,7 @@ export class SesionPeliculaService {
     );
   }
 
-  obtenerFechasSesionesPeliculas(
-    idPelicula: number,
-  ): Observable<string[]> {
+  obtenerFechasSesionesPeliculas(idPelicula: number): Observable<string[]> {
     return this.http.get<string[]>(this.url + '/id/' + idPelicula);
   }
 }

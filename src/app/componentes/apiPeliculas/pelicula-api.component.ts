@@ -20,11 +20,11 @@ export class PeliculaApiComponent implements OnInit {
     private salaServicio: SalaService,
   ) {}
 
-  fechaActual = new Date('2024-06-12T09:00:00Z');
-  fechaFinal = new Date('2024-06-27T23:59:59Z');
+  fechaActual = new Date('2024-06-13T09:00:00Z');
+  fechaFinal = new Date('2024-06-28T23:59:59Z');
   sala = 1;
 
-  ngOnInit(): void {/* 
+  ngOnInit(): void {
     this.peliculaServicio.obtenerPeliculas().subscribe({
       next: (peliculas) => {
         let cont = 0;
@@ -49,6 +49,7 @@ export class PeliculaApiComponent implements OnInit {
               );
               const horaFinal = this.fechaActual.toUTCString().split(' ')[4];
 
+              /* const precio = Math.floor(Math.random() * (12 - 6)) + 6.99;
               console.log(
                 'pelicula: ' +
                   pelicula.titulo +
@@ -61,13 +62,23 @@ export class PeliculaApiComponent implements OnInit {
                   ' duracion: ' +
                   pelicula.duracion +
                   ' fecha: ' +
-                  fecha,
-              );
+                  fecha +
+                  ' precio: ' +
+                  precio,
+              ); */
 
-              this.salaServicio.obtenerSala(this.sala).subscribe({
+              /* this.salaServicio.obtenerSala(this.sala).subscribe({
                 next: (sala) => {
+                  const precio = Math.floor(Math.random() * (12 - 6)) + 6.99;
                   this.sesionPeliculaServicio
-                    .guardarSesion(pelicula, sala, fecha, horaInicio, horaFinal)
+                    .guardarSesion(
+                      pelicula,
+                      sala,
+                      fecha,
+                      horaInicio,
+                      horaFinal,
+                      precio,
+                    )
                     .subscribe({
                       next: (sesionGuardada) => {
                         console.log(sesionGuardada);
@@ -77,14 +88,14 @@ export class PeliculaApiComponent implements OnInit {
                       },
                     });
                 },
-              });
+              }); */
 
               this.fechaActual.setMinutes(this.fechaActual.getMinutes() + 10);
               cont++;
             } else {
-              console.log(
+              /* console.log(
                 '----------------------------------------------------------------------------------',
-              );
+              ); */
               this.sala++;
               const fechaActualUTC = new Date(
                 this.fechaActual.getTime() +
@@ -106,6 +117,7 @@ export class PeliculaApiComponent implements OnInit {
               );
               const horaFinal = this.fechaActual.toUTCString().split(' ')[4];
 
+              /* const precio = Math.floor(Math.random() * (12 - 6)) + 6.99;
               console.log(
                 'pelicula: ' +
                   pelicula.titulo +
@@ -118,13 +130,23 @@ export class PeliculaApiComponent implements OnInit {
                   ' duracion: ' +
                   pelicula.duracion +
                   ' fecha: ' +
-                  fecha,
-              );
+                  fecha +
+                  ' precio: ' +
+                  precio,
+              ); */
 
-              this.salaServicio.obtenerSala(this.sala).subscribe({
+              /* this.salaServicio.obtenerSala(this.sala).subscribe({
                 next: (sala) => {
+                  const precio = Math.floor(Math.random() * (12 - 6)) + 6.99;
                   this.sesionPeliculaServicio
-                    .guardarSesion(pelicula, sala, fecha, horaInicio, horaFinal)
+                    .guardarSesion(
+                      pelicula,
+                      sala,
+                      fecha,
+                      horaInicio,
+                      horaFinal,
+                      precio,
+                    )
                     .subscribe({
                       next: (sesionGuardada) => {
                         console.log(sesionGuardada);
@@ -134,7 +156,7 @@ export class PeliculaApiComponent implements OnInit {
                       },
                     });
                 },
-              });
+              }); */
 
               this.fechaActual.setMinutes(this.fechaActual.getMinutes() + 10);
               cont++;
@@ -155,9 +177,9 @@ export class PeliculaApiComponent implements OnInit {
               fechaActualUTC.getTimezoneOffset() * 60000,
           );
           this.sala++;
-          console.log(
+          /* console.log(
             'REVERSEREVERSEREVERSEREVERSEREVERSEREVERSEREVERSEREVERSEREVERSEREVERSEREVERSEREVERSEREVERSEREVERSEREVERSE',
-          );
+          ); */
 
           peliculas.reverse().forEach((pelicula) => {
             const horaActual = this.fechaActual.getUTCHours();
@@ -176,6 +198,7 @@ export class PeliculaApiComponent implements OnInit {
               );
               const horaFinal = this.fechaActual.toUTCString().split(' ')[4];
 
+              /* const precio = Math.floor(Math.random() * (12 - 6)) + 6.99;
               console.log(
                 'pelicula: ' +
                   pelicula.titulo +
@@ -188,13 +211,23 @@ export class PeliculaApiComponent implements OnInit {
                   ' duracion: ' +
                   pelicula.duracion +
                   ' fecha: ' +
-                  fecha,
-              );
+                  fecha +
+                  ' precio: ' +
+                  precio,
+              ); */
 
-              this.salaServicio.obtenerSala(this.sala).subscribe({
+              /* this.salaServicio.obtenerSala(this.sala).subscribe({
                 next: (sala) => {
+                  const precio = Math.floor(Math.random() * (12 - 6)) + 6.99;
                   this.sesionPeliculaServicio
-                    .guardarSesion(pelicula, sala, fecha, horaInicio, horaFinal)
+                    .guardarSesion(
+                      pelicula,
+                      sala,
+                      fecha,
+                      horaInicio,
+                      horaFinal,
+                      precio,
+                    )
                     .subscribe({
                       next: (sesionGuardada) => {
                         console.log(sesionGuardada);
@@ -204,14 +237,14 @@ export class PeliculaApiComponent implements OnInit {
                       },
                     });
                 },
-              });
+              }); */
 
               this.fechaActual.setMinutes(this.fechaActual.getMinutes() + 10);
               cont++;
             } else {
-              console.log(
+              /* console.log(
                 '----------------------------------------------------------------------------------',
-              );
+              ); */
               this.sala++;
               const fechaActualUTC = new Date(
                 this.fechaActual.getTime() +
@@ -233,6 +266,7 @@ export class PeliculaApiComponent implements OnInit {
               );
               const horaFinal = this.fechaActual.toUTCString().split(' ')[4];
 
+              /* const precio = Math.floor(Math.random() * (12 - 6)) + 6.99;
               console.log(
                 'pelicula: ' +
                   pelicula.titulo +
@@ -245,13 +279,23 @@ export class PeliculaApiComponent implements OnInit {
                   ' duracion: ' +
                   pelicula.duracion +
                   ' fecha: ' +
-                  fecha,
-              );
+                  fecha +
+                  ' precio: ' +
+                  precio,
+              ); */
 
-              this.salaServicio.obtenerSala(this.sala).subscribe({
+              /* this.salaServicio.obtenerSala(this.sala).subscribe({
                 next: (sala) => {
+                  const precio = Math.floor(Math.random() * (12 - 6)) + 6.99;
                   this.sesionPeliculaServicio
-                    .guardarSesion(pelicula, sala, fecha, horaInicio, horaFinal)
+                    .guardarSesion(
+                      pelicula,
+                      sala,
+                      fecha,
+                      horaInicio,
+                      horaFinal,
+                      precio,
+                    )
                     .subscribe({
                       next: (sesionGuardada) => {
                         console.log(sesionGuardada);
@@ -261,7 +305,7 @@ export class PeliculaApiComponent implements OnInit {
                       },
                     });
                 },
-              });
+              }); */
 
               this.fechaActual.setMinutes(this.fechaActual.getMinutes() + 10);
               cont++;
@@ -282,7 +326,7 @@ export class PeliculaApiComponent implements OnInit {
           peliculas.sort(() => Math.random() - 0.5);
         }
       },
-    }); */
+    });
   }
 
   /* ngOnInit(): void {

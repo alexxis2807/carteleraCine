@@ -9,12 +9,14 @@ import { SesionPeliculaService } from '../../../servicios/sesion-pelicula.servic
 @Component({
   selector: 'app-pelicula-detalles',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './pelicula-detalles.component.html',
   styleUrl: './pelicula-detalles.component.scss',
 })
 export class PeliculaDetallesComponent implements OnInit {
   urlImagenes = environment.urlApiImagenes;
+
+  modalActivado = false;
 
   idPelicula!: number;
   detallesPelicula!: Peliculas;

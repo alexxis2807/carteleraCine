@@ -63,10 +63,21 @@ export interface Sala {
   capacidad: number;
 }
 
-export interface SesionPelicula {
+export interface SesionPeliculaRequest {
   pelicula: Peliculas;
   sala: Sala;
   fecha: string;
   horaInicio: string;
   horaFin: string;
+  precio: number;
+}
+
+export interface SesionPelicula {
+  id: number;
+  pelicula: Peliculas;
+  sala: Sala;
+  fecha: string;
+  horaInicio: string;
+  horaFin: string;
+  precio: number;
 }
