@@ -1,2 +1,22 @@
-<p>sesion-pelicula works!</p>
 <h1>{{ idSesion }}</h1>
+<div class="w-full h-full flex flex-col px-7 py-5 bg-cyan-200">
+  <h1 class="w-full text-center text-2xl">
+    {{ sesionPelicula.pelicula.titulo.toLocaleUpperCase() }}
+  </h1>
+  <div class="flex justify-between py-5">
+    <p>Sala: {{ sesionPelicula.sala.id }}</p>
+    <p>Duracion: {{ sesionPelicula.pelicula.duracion }} min</p>
+    <p>Fecha: {{ sesionPelicula.fecha }}</p>
+    <p>Hora: {{ sesionPelicula.horaInicio }}</p>
+  </div>
+  <h1 class="text-3xl text-center">!HORA DE ELEGIR ASIENTOS¡</h1>
+  <ul>
+    @for (item of [].constructor(60); track $index) {
+      @if (asientosOcupados.includes($index + 1)) {
+        <li class="text-red-700">{{ $index + 1 }}</li>
+      } @else {
+        <li class="text-green-600">{{ $index + 1 }}</li>
+      }
+    }
+  </ul>
+</div>

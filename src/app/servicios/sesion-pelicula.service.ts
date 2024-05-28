@@ -46,6 +46,14 @@ export class SesionPeliculaService {
   }
 
   obtenerFechasSesionesPeliculas(idPelicula: number): Observable<string[]> {
-    return this.http.get<string[]>(this.url + '/id/' + idPelicula);
+    return this.http.get<string[]>(this.url + '/fechas/id/' + idPelicula);
+  }
+
+  obtenerSesionPelicula(idPelicula: number): Observable<SesionPelicula> {
+    return this.http.get<SesionPelicula>(this.url + '/id/' + idPelicula);
+  }
+
+  obtenerAsientosOcupados(idSesion: number): Observable<number[]> {
+    return this.http.get<number[]>(this.url + '/asientos/idSesion/' + idSesion);
   }
 }
