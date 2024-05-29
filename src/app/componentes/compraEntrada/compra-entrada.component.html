@@ -1,0 +1,12 @@
+<p>compra-entrada works!</p>
+<h2>Detalles de los Asientos</h2>
+<div *ngFor="let entrada of entradas">
+  Asiento: {{ entrada.numeroAsiento }} - ID Sesión:
+  {{ entrada.sesionPelicula.id }} Precio: {{ entrada.precio }} Sala:
+  {{ entrada.sesionPelicula.sala.id }} Fecha:
+  {{ entrada.sesionPelicula.fecha }} Hora:
+  {{ entrada.sesionPelicula.horaInicio }}
+</div>
+
+<button>PAGAR</button>
+<button>CANCELAR</button>

@@ -7,6 +7,7 @@ import { PeliculaDetallesComponent } from './componentes/peliculas/detalles/peli
 import { PeliculaApiComponent } from './componentes/apiPeliculas/pelicula-api.component';
 import { TodasPeliculasComponent } from './componentes/peliculas/todasPeliculas/todas-peliculas.component';
 import { SesionPeliculaComponent } from './componentes/sesion/sesion-pelicula.component';
+import { CompraEntradaComponent } from './componentes/compraEntrada/compra-entrada.component';
 
 export const routes: Routes = [
   { path: 'FormularioUsuario', component: FormUsuarioComponent },
@@ -20,4 +21,5 @@ export const routes: Routes = [
     component: PeliculaDetallesComponent,
   },
   { path: 'reservaSesion/:idSesion', component: SesionPeliculaComponent },
+  { path: 'compraEntrada', component: CompraEntradaComponent },
 ];

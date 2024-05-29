@@ -81,3 +81,18 @@ export interface SesionPelicula {
   horaFin: string;
   precio: number;
 }
+
+export interface Entrada {
+  id: number;
+  sesionPelicula: SesionPelicula;
+  numeroAsiento: number;
+  usuario: Usuario;
+  precio: number;
+}
+
+export interface EntradaRequest {
+  idSesion: number;
+  asientos: number[];
+  idUsuario: number;
+  precio: number;
+}
