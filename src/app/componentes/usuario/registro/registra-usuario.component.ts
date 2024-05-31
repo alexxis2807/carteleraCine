@@ -51,10 +51,12 @@ export class RegistraUsuarioComponent implements OnInit {
       } else {
         this.usuarioService.registrarUsuario(usuario).subscribe({
           next: (usuario) => {
-            sessionStorage.setItem('token', 'token' + usuario.idUsuario);
+            sessionStorage.setItem('token', usuario.contraseña);
+            sessionStorage.setItem('Username', usuario.nombreUsuario);
+
             this.error = 'Te has registrado correctamente!';
             window.setTimeout(() => {
-              this.router.navigateByUrl('/');
+              window.location.href = "/peliculas"
             }, 2000);
           },
           error: (err) => {

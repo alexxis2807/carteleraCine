@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -17,11 +17,11 @@ export class HeaderComponent implements OnInit {
     if (sessionStorage.getItem('token')) {
       this.haySesion = true;
     }
-    console.log('-----------------');
   }
 
   cerrarSesion() {
     sessionStorage.removeItem('token');
-    window.location.href = '/';
+    sessionStorage.removeItem('Username');
+    window.location.href = '/inicioSesion';
   }
 }

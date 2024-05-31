@@ -93,6 +93,6 @@ export interface Entrada {
 export interface EntradaRequest {
   idSesion: number;
   asientos: number[];
-  idUsuario: number;
+  nombreUsuario: string;
   precio: number;
 }

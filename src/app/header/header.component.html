@@ -1,8 +1,50 @@
-<div class="w-full bg-color-primario h-20 flex gap-10">
+<div class="w-full bg-color-primario h-20 flex">
   @if (haySesion) {
-    <button (click)="cerrarSesion()">Cerrar Sesion</button>
+    <button
+      routerLinkActive="bg-green-400 hover:bg-green-400 "
+      cursor-auto
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="py-5 px-10 hover:bg-blue-300"
+      routerLink="/peliculas"
+    >
+      Películas
+    </button>
+    <button
+      routerLinkActive="bg-green-400 hover:bg-green-400 cursor-auto"
+      class="py-5 px-10 hover:bg-blue-300"
+      routerLink="/peliculas/populares"
+    >
+      Populares
+    </button>
+    <button
+      routerLinkActive="bg-green-400 hover:bg-green-400 cursor-auto"
+      class="py-5 px-10 hover:bg-blue-300"
+      routerLink="/misEntradas"
+    >
+      Mis entradas
+    </button>
+
+    <button
+      routerLinkActive="bg-green-400 hover:bg-green-400 cursor-auto"
+      class="py-5 px-10 hover:bg-blue-300"
+      (click)="cerrarSesion()"
+    >
+      Cerrar Sesion
+    </button>
   } @else {
-    <button routerLink="/inicioSesion">Inicio de sesion</button>
-    <button routerLink="/registro">Registrarse</button>
+    <button
+      routerLinkActive="bg-green-400 hover:bg-green-400 cursor-auto"
+      class="py-5 px-10 hover:bg-blue-300"
+      routerLink="/inicioSesion"
+    >
+      Inicio de sesion
+    </button>
+    <button
+      routerLinkActive="bg-green-400 hover:bg-green-400 cursor-auto"
+      class="py-5 px-10 hover:bg-blue-300"
+      routerLink="/registro"
+    >
+      Registrarse
+    </button>
   }
 </div>

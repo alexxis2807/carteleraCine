@@ -69,13 +69,17 @@ export class SesionPeliculaComponent implements OnInit {
     const asientos = this.asientosElegidos;
     if (asientos.length > 0) {
       const idSesion = this.sesionPelicula.id;
-      const idUsuario = 1;
+      const nombreUsuario = sessionStorage.getItem('Username');
+      console.log(asientos);
+      if (nombreUsuario == null) {
+        this.error = 'El nombre de usuario no existe';
+        return;
+      }
       const precio = this.sesionPelicula.precio;
       this.entradaServicio
-        .guardarEntradas(idSesion, asientos, idUsuario, precio)
+        .guardarEntradas(idSesion, asientos, nombreUsuario, precio)
         .subscribe({
           next: (entradas) => {
-            console.log(entradas);
             sessionStorage.setItem(
               'entradasEnProceso',
               JSON.stringify(entradas),

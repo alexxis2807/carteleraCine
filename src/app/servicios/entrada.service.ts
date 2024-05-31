@@ -14,18 +14,24 @@ export class EntradaService {
   guardarEntradas(
     idSesionPelicula: number,
     asientos: number[],
-    idUsuario: number,
+    nombreUsuario: string,
     precio: number,
   ): Observable<Entrada[]> {
     const entrada = {
       idSesion: idSesionPelicula,
       asientos,
-      idUsuario,
+      nombreUsuario,
       precio,
     };
     return this.http.post<Entrada[]>(this.url + '/guardar', entrada);
   }
-  obtenerEntradasUsuario(idUsuario: number): Observable<Entrada[]> {
-    return this.http.get<Entrada[]>(this.url + '/idUsuario/' + idUsuario);
+  obtenerEntradasUsuario(nombreUsuario: string): Observable<Entrada[]> {
+    return this.http.get<Entrada[]>(
+      this.url + '/nombreUsuario/' + nombreUsuario,
+    );
+  }
+
+  eliminarEntrada(idEntrada: number): Observable<void> {
+    return this.http.delete<void>(this.url + '/eliminar/' + idEntrada);
   }
 }

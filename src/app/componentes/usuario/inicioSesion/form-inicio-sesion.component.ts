@@ -43,8 +43,9 @@ export class FormInicioSesionComponent implements OnInit {
         .inicioSesion(form.nombreUsuario, form.contraseña)
         .subscribe({
           next: (usuario) => {
-            sessionStorage.setItem('token', 'token' + usuario.idUsuario);
-            window.location.href = '/';
+            sessionStorage.setItem('token', usuario.contraseña);
+            sessionStorage.setItem('Username', usuario.nombreUsuario);
+            window.location.href = '/peliculas';
           },
           error: (err) => {
             if (err.status == 404) {

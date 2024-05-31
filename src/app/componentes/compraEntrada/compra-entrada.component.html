@@ -1,12 +1,38 @@
-<p>compra-entrada works!</p>
-<h2>Detalles de los Asientos</h2>
-<div *ngFor="let entrada of entradas">
-  Asiento: {{ entrada.numeroAsiento }} - ID Sesión:
-  {{ entrada.sesionPelicula.id }} Precio: {{ entrada.precio }} Sala:
-  {{ entrada.sesionPelicula.sala.id }} Fecha:
-  {{ entrada.sesionPelicula.fecha }} Hora:
-  {{ entrada.sesionPelicula.horaInicio }}
+<div class="flex justify-center items-center p-9">
+  <h1 class="text-center text-2xl">
+    {{ entradas[0].sesionPelicula.pelicula.titulo.toLocaleUpperCase() }}
+  </h1>
 </div>
-
-<button>PAGAR</button>
-<button>CANCELAR</button>
+<div
+  class="flex flex-col items-center gap-10 w-[40rem] p-5 rounded-xl bg-green-100 m-auto"
+>
+  <h2>Detalles de los Asientos</h2>
+  <div class="flex flex-col gap-3">
+    @for (entrada of entradas; track entrada.id) {
+      <div>
+        Asiento: {{ entrada.numeroAsiento }} - ID Sesión:
+        {{ entrada.sesionPelicula.id }} Precio: {{ entrada.precio }} Sala:
+        {{ entrada.sesionPelicula.sala.id }} Fecha:
+        {{ entrada.sesionPelicula.fecha }} Hora:
+        {{ entrada.sesionPelicula.horaInicio }}
+      </div>
+    }
+  </div>
+  <div>
+    <p>TOTAL A PAGAR: {{ totalCompra }} €</p>
+  </div>
+  <div class="flex gap-10">
+    <button class="bg-cyan-200 rounded-lg px-5 py-2" (click)="realizarCompra()">
+      PAGAR
+    </button>
+    <button
+      class="bg-cyan-200 rounded-lg px-5 py-2"
+      (click)="cancelarEntradas()"
+    >
+      CANCELAR COMPRA
+    </button>
+  </div>
+</div>
+@if (mensajeExitoCompra) {
+  <h1 class="text-xl text-green-600">{{ mensajeExitoCompra }}</h1>
+}
