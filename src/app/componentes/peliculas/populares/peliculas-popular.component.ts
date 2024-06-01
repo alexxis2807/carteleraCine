@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PeliculasService } from '../../../servicios/peliculas.service';
 import { DetallePoster, Pelicula } from '../../../interfaces';
-import { Router } from '@angular/router';
 import { PeliculaComponent } from '../cartaPelicula/pelicula.component';
 
 @Component({
@@ -16,17 +15,12 @@ export class PeliculasPopularComponent implements OnInit {
 
   portadas = [];
 
-  constructor(
-    private peliculaService: PeliculasService,
-    private router: Router,
-  ) {}
+  constructor(private peliculaService: PeliculasService) {}
 
   ngOnInit(): void {
-    //Obtengo las peliculas populares
     this.peliculaService.obtenerPosterPeliculasPopulares().subscribe({
       next: (peliculasEncontradas) => {
         this.peliculas = peliculasEncontradas;
-        console.log(this.peliculas);
       },
     });
   }

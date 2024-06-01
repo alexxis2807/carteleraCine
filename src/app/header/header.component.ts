@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('Username');
     localStorage.setItem('sessionCerrada', 'true');
-
+    localStorage.removeItem('sessionCerrada');
     window.location.href = '/inicioSesion';
   }
 }

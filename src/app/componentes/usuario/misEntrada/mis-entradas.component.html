@@ -1,4 +1,4 @@
-@if (entradasUsuario.length > 0) {
+@if (entradasUsuario) {
   <h1 class="text-center text-2xl">MIS ENTRADAS</h1>
   <div class="flex flex-col items-center gap-5">
     @for (entrada of entradasUsuario; track entrada.id) {

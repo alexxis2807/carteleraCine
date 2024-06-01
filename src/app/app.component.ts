@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 
@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
       if (event.key === 'sessionCerrada') {
         localStorage.removeItem('token');
         localStorage.removeItem('Username');
-        localStorage.removeItem('sessionCerrada');
         window.location.href = '/inicioSesion';
       } else {
         if (localStorage.getItem('token') && localStorage.getItem('Username')) {

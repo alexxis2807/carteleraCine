@@ -34,4 +34,14 @@ export class EntradaService {
   eliminarEntrada(idEntrada: number): Observable<void> {
     return this.http.delete<void>(this.url + '/eliminar/' + idEntrada);
   }
+
+  confirmarEntrada(
+    idEntrada: number,
+    nombreUsuario: string,
+  ): Observable<Entrada> {
+    return this.http.put<Entrada>(this.url + '/confirmarEntrada', {
+      idEntrada,
+      nombreUsuario,
+    });
+  }
 }

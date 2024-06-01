@@ -41,14 +41,13 @@ export class PeliculaDetallesComponent implements OnInit {
       complete: () => {
         this.obtenerURLSegura();
         this.obtenerFechasSesiones(this.detallesPelicula.id);
-        console.log(this.detallesPelicula);
       },
     });
   }
 
   obtenerURLSegura() {
     this.trailerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-      'https://www.youtube.com/embed/' + this.detallesPelicula,
+      'https://www.youtube.com/embed/' + this.detallesPelicula.rutaTrailer,
     );
   }
 

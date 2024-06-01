@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Entrada } from '../../interfaces';
 import { CommonModule } from '@angular/common';
@@ -11,9 +11,10 @@ import { EntradaService } from '../../servicios/entrada.service';
   templateUrl: './compra-entrada.component.html',
   styleUrl: './compra-entrada.component.scss',
 })
-export class CompraEntradaComponent implements OnInit {
+export class CompraEntradaComponent implements OnInit, OnDestroy {
   tiempoSesion: number = 30;
   interval: any;
+  seHaRealizadoCompra = false;
 
   entradas!: Entrada[];
   totalCompra = 0;
@@ -25,6 +26,15 @@ export class CompraEntradaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const data = localStorage.getItem('entradasEnProceso');
+    if (data == null) {
+      this.router.navigateByUrl('/peliculas');
+    }
+    this.entradas = data ? JSON.parse(data) : null;
+    this.entradas.forEach((entrada) => {
+      this.totalCompra = this.totalCompra + entrada.precio;
+    });
+
     const tiempoSesion = localStorage.getItem('tiempoSesion');
 
     if (tiempoSesion) {
@@ -42,15 +52,6 @@ export class CompraEntradaComponent implements OnInit {
     }
 
     this.comenzarTiempoSesion();
-
-    const data = localStorage.getItem('entradasEnProceso');
-    if (data == null) {
-      this.router.navigateByUrl('/peliculas');
-    }
-    this.entradas = data ? JSON.parse(data) : null;
-    this.entradas.forEach((entrada) => {
-      this.totalCompra = this.totalCompra + entrada.precio;
-    });
   }
 
   cancelarEntradas() {
@@ -62,14 +63,29 @@ export class CompraEntradaComponent implements OnInit {
       '/reservaSesion/' + this.entradas[0].sesionPelicula.id;
   }
 
-  realizarCompra() {
-    localStorage.removeItem('entradasEnProceso');
-    localStorage.removeItem('tiempoSesion');
+  async realizarCompra() {
+    const nombreUsuario = localStorage.getItem('Username');
+    if (nombreUsuario != null) {
+      const promesas = this.entradas.map((entrada) =>
+        this.entradaServicio
+          .confirmarEntrada(entrada.id, nombreUsuario)
+          .subscribe(),
+      );
 
-    this.mensajeExitoCompra = 'Tu compra se ha realizado correctamente!';
-    setTimeout(() => {
-      window.location.href = '/peliculas';
-    }, 2000);
+      try {
+        await Promise.all(promesas);
+
+        this.seHaRealizadoCompra = true;
+        localStorage.removeItem('entradasEnProceso');
+        localStorage.removeItem('tiempoSesion');
+        this.mensajeExitoCompra = 'Tu compra se ha realizado correctamente!';
+        setTimeout(() => {
+          window.location.href = '/peliculas';
+        }, 2000);
+      } catch (error) {
+        console.error('Error al confirmar las entradas', error);
+      }
+    }
   }
 
   comenzarTiempoSesion() {
@@ -85,6 +101,7 @@ export class CompraEntradaComponent implements OnInit {
   sesionExpirada() {
     clearInterval(this.interval);
     localStorage.removeItem('tiempoSesion');
+    localStorage.removeItem('entradasEnProceso');
     this.cancelarEntradas();
     alert('Sesión finalizada. Vas a ser redirigido');
   }
@@ -96,6 +113,13 @@ export class CompraEntradaComponent implements OnInit {
     return this.tiempoSesion % 60;
   }
   ngOnDestroy(): void {
+    if (!this.seHaRealizadoCompra && this.entradas) {
+      this.entradas.forEach((entrada) => {
+        this.entradaServicio.eliminarEntrada(entrada.id).subscribe();
+      });
+    }
+    localStorage.removeItem('tiempoSesion');
+    localStorage.removeItem('entradasEnProceso');
     clearInterval(this.interval);
   }
 }

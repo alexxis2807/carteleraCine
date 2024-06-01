@@ -1,57 +1,62 @@
-<div class="w-full h-full">
-  <div class="bg-color-secundario flex text-white">
-    <img src="{{ urlImagenes }}{{ detallesPelicula.rutaPoster }}" alt="" />
-    <div class="flex flex-col p-5">
-      <h1 class="titulo-cabecera">{{ detallesPelicula.titulo }}</h1>
+@if (detallesPelicula) {
+  <div class="w-full h-full">
+    <div class="bg-color-secundario flex text-white">
+      <img src="{{ urlImagenes }}{{ detallesPelicula.rutaPoster }}" alt="" />
+      <div class="flex flex-col p-5">
+        <h1 class="titulo-cabecera">{{ detallesPelicula.titulo }}</h1>
 
-      <div>
-        <p>{{ detallesPelicula.resumen }}</p>
-        <div class="flex gap-5">
-          @for (genero of detallesPelicula.generos; track detallesPelicula.id) {
-            <p>{{ genero.nombre }}</p>
-          }
-          <p>{{ detallesPelicula.fechaEstreno }}</p>
-          <div>Valoración: {{ detallesPelicula.promedioVotos }}</div>
-          <div>Duración: {{ detallesPelicula.duracion }} min</div>
+        <div>
+          <p>{{ detallesPelicula.resumen }}</p>
+          <div class="flex gap-5">
+            @for (
+              genero of detallesPelicula.generos;
+              track detallesPelicula.id
+            ) {
+              <p>{{ genero.nombre }}</p>
+            }
+            <p>{{ detallesPelicula.fechaEstreno }}</p>
+            <div>Valoración: {{ detallesPelicula.promedioVotos }}</div>
+            <div>Duración: {{ detallesPelicula.duracion }} min</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <iframe
-    [src]="trailerUrl"
-    width="560"
-    height="315"
-    frameborder="0"
-    allowfullscreen
-  ></iframe>
+    <iframe
+      [src]="trailerUrl"
+      width="560"
+      height="315"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
 
-  <div class="overflow-x-auto flex w-full">
-    @for (fecha of fechasSesiones; track $index) {
-      <button
-        (click)="obtenerSesionesPorFecha(fecha, detallesPelicula.id)"
-        class="bg-cyan-400 border border-black min-w-40 h-20"
-      >
-        {{ fecha }}
-      </button>
+    <div class="overflow-x-auto flex w-full">
+      @for (fecha of fechasSesiones; track $index) {
+        <button
+          (click)="obtenerSesionesPorFecha(fecha, detallesPelicula.id)"
+          class="bg-cyan-400 border border-black min-w-40 h-20"
+        >
+          {{ fecha }}
+        </button>
+      }
+    </div>
+    @if (sesionesPorFecha) {
+      <div class="flex flex-col items-center">
+        <h1>ELIGE LA MEJOR HORA</h1>
+        <h1>Fecha: {{ fechaElegida }}</h1>
+        <div class="flex gap-10">
+          @for (sesion of sesionesPorFecha; track sesion.id) {
+            <button
+              class="w-40 h-20 bg-cyan-200 flex flex-col items-center justify-center"
+              routerLink="/reservaSesion/{{ sesion.id }}"
+            >
+              <p>{{ sesion.horaInicio }}</p>
+              <p>{{ sesion.precio }}€</p>
+              <p>{{ sesion.id }}</p>
+            </button>
+          }
+        </div>
+      </div>
     }
   </div>
-  @if (sesionesPorFecha) {
-    <div class="flex flex-col items-center">
-      <h1>ELIGE LA MEJOR HORA</h1>
-      <h1>Fecha: {{ fechaElegida }}</h1>
-      <div class="flex gap-10">
-        @for (sesion of sesionesPorFecha; track sesion.id) {
-          <button
-            class="w-40 h-20 bg-cyan-200 flex flex-col items-center justify-center"
-            routerLink="/reservaSesion/{{ sesion.id }}"
-          >
-            <p>{{ sesion.horaInicio }}</p>
-            <p>{{ sesion.precio }}€</p>
-            <p>{{ sesion.id }}</p>
-          </button>
-        }
-      </div>
-    </div>
-  }
-</div>
+}

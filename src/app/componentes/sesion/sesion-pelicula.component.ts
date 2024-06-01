@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { SesionPeliculaService } from '../../servicios/sesion-pelicula.service';
 import { CommonModule } from '@angular/common';
 import { EntradaService } from '../../servicios/entrada.service';
+import { environment } from '../../../assets/environments';
 
 @Component({
   selector: 'app-sesion-pelicula',
@@ -18,6 +19,7 @@ export class SesionPeliculaComponent implements OnInit {
   asientosOcupados!: number[];
   asientosElegidos: number[] = [];
   error = '';
+  usuarioReserva = environment.adminReservas;
 
   constructor(
     private route: ActivatedRoute,
@@ -70,14 +72,13 @@ export class SesionPeliculaComponent implements OnInit {
     if (asientos.length > 0) {
       const idSesion = this.sesionPelicula.id;
       const nombreUsuario = localStorage.getItem('Username');
-      console.log(asientos);
       if (nombreUsuario == null) {
         this.error = 'El nombre de usuario no existe';
         return;
       }
       const precio = this.sesionPelicula.precio;
       this.entradaServicio
-        .guardarEntradas(idSesion, asientos, nombreUsuario, precio)
+        .guardarEntradas(idSesion, asientos, this.usuarioReserva, precio)
         .subscribe({
           next: (entradas) => {
             localStorage.setItem('entradasEnProceso', JSON.stringify(entradas));

@@ -5,6 +5,7 @@ export const environment = {
   urlSala: 'http://localhost:8080/sala',
   urlEntradaPelicula: 'http://localhost:8080/entrada',
   urlVerificaToken: 'http://localhost:8080/usuarios/verificaToken',
+  adminReservas: 'administrador',
 
   urlApiPeliculas: 'https://api.themoviedb.org/3/movie',
   urlApiPeliculasDiscover: 'https://api.themoviedb.org/3/discover/movie',
