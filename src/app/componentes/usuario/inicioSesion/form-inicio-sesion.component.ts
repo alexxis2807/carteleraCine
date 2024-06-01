@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { UsuarioService } from '../../../servicios/usuario.service';
-import { Router } from '@angular/router';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-form-inicio-sesion',
@@ -15,19 +15,19 @@ import { Router } from '@angular/router';
   templateUrl: './form-inicio-sesion.component.html',
   styleUrl: './form-inicio-sesion.component.scss',
 })
-export class FormInicioSesionComponent implements OnInit {
+export class FormInicioSesionComponent implements OnInit, OnDestroy {
   formInicio!: FormGroup;
   error = '';
+  subscripcion!: Subscription;
 
   constructor(
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
-    private router: Router,
   ) {}
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('token')) {
-      this.router.navigateByUrl('/');
+    if (localStorage.getItem('token') && localStorage.getItem('Username')) {
+      window.location.href = '/peliculas';
     }
 
     this.formInicio = this.fb.group({
@@ -43,8 +43,9 @@ export class FormInicioSesionComponent implements OnInit {
         .inicioSesion(form.nombreUsuario, form.contraseña)
         .subscribe({
           next: (usuario) => {
-            sessionStorage.setItem('token', usuario.contraseña);
-            sessionStorage.setItem('Username', usuario.nombreUsuario);
+            localStorage.setItem('token', usuario.contraseña);
+            localStorage.setItem('Username', usuario.nombreUsuario);
+
             window.location.href = '/peliculas';
           },
           error: (err) => {
@@ -57,6 +58,12 @@ export class FormInicioSesionComponent implements OnInit {
       this.error = 'El nombre de usuario es obligatorio';
     } else if (form.contraseña == '') {
       this.error = 'La contraseña es obligatoria';
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscripcion) {
+      this.subscripcion.unsubscribe();
     }
   }
 }

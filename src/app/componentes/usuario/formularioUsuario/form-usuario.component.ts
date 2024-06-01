@@ -11,6 +11,5 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class FormUsuarioComponent {
   @Input() formUsuario!: FormGroup;
   @Input() accionSubmit!: Function;
-  @Input() accionVolver!: Function;
   @Input() textoSubmit!: string;
 }

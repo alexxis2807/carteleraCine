@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 
@@ -9,6 +9,21 @@ import { HeaderComponent } from './header/header.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'CarteleraCine';
+
+  ngOnInit() {
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'sessionCerrada') {
+        localStorage.removeItem('token');
+        localStorage.removeItem('Username');
+        localStorage.removeItem('sessionCerrada');
+        window.location.href = '/inicioSesion';
+      } else {
+        if (localStorage.getItem('token') && localStorage.getItem('Username')) {
+          window.location.href = '/peliculas';
+        }
+      }
+    });
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,17 +11,19 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 export class HeaderComponent implements OnInit {
   haySesion = false;
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('token')) {
+    if (localStorage.getItem('token')) {
       this.haySesion = true;
     }
   }
 
   cerrarSesion() {
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('Username');
+    localStorage.removeItem('token');
+    localStorage.removeItem('Username');
+    localStorage.setItem('sessionCerrada', 'true');
+
     window.location.href = '/inicioSesion';
   }
 }

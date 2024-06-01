@@ -37,18 +37,18 @@ export class PeliculaDetallesComponent implements OnInit {
     this.peliculasServicio.obtenerDetallesPelicula(this.idPelicula).subscribe({
       next: (detalles) => {
         this.detallesPelicula = detalles;
-        console.log(this.detallesPelicula.rutaTrailer);
       },
       complete: () => {
         this.obtenerURLSegura();
         this.obtenerFechasSesiones(this.detallesPelicula.id);
+        console.log(this.detallesPelicula);
       },
     });
   }
 
   obtenerURLSegura() {
     this.trailerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-      'https://www.youtube.com/embed/' + this.detallesPelicula.rutaTrailer,
+      'https://www.youtube.com/embed/' + this.detallesPelicula,
     );
   }
 

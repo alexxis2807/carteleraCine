@@ -22,10 +22,6 @@ export class PeliculasPopularComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /*  if (!sessionStorage.getItem('token')) {
-      this.router.navigateByUrl('/inicioSesion');
-    } */
-
     //Obtengo las peliculas populares
     this.peliculaService.obtenerPosterPeliculasPopulares().subscribe({
       next: (peliculasEncontradas) => {

@@ -22,10 +22,11 @@ export class UsuarioService {
 
   public inicioSesion(
     nombreUsuario: string,
-    contraseña: string,
+    contrasena: string,
   ): Observable<Usuario> {
-    return this.http.get<Usuario>(
-      this.url + '/inicioSesion/' + nombreUsuario + '/' + contraseña,
-    );
+    return this.http.post<Usuario>(this.url + '/inicioSesion', {
+      nombreUsuario,
+      contrasena,
+    });
   }
 }

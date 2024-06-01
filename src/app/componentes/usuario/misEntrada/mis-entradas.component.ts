@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './mis-entradas.component.scss',
 })
 export class MisEntradasComponent implements OnInit {
-  nombreUsuario = sessionStorage.getItem('Username') || '';
+  nombreUsuario = localStorage.getItem('Username') || '';
   entradasUsuario!: Entrada[];
 
   constructor(private entradaServicio: EntradaService) {}

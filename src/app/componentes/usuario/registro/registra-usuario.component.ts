@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { FormUsuarioComponent } from '../formularioUsuario/form-usuario.component';
 import { UsuarioService } from '../../../servicios/usuario.service';
-import { Router } from '@angular/router';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-registra-usuario',
@@ -16,23 +16,22 @@ import { Router } from '@angular/router';
   templateUrl: './registra-usuario.component.html',
   styleUrl: './registra-usuario.component.scss',
 })
-export class RegistraUsuarioComponent implements OnInit {
+export class RegistraUsuarioComponent implements OnInit, OnDestroy {
   formUsuario!: FormGroup;
   textoSubmit = 'Registrar';
   registrar!: Function;
   error = '';
+  subscripcion!: Subscription;
 
   constructor(
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
-    private router: Router,
   ) {}
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('token')) {
-      this.router.navigateByUrl('/');
+    if (localStorage.getItem('token') && localStorage.getItem('Username')) {
+      window.location.href = '/peliculas';
     }
-
     this.formUsuario = this.fb.group({
       nombreUsuario: ['', Validators.required],
       contraseña: ['', Validators.required],
@@ -51,12 +50,12 @@ export class RegistraUsuarioComponent implements OnInit {
       } else {
         this.usuarioService.registrarUsuario(usuario).subscribe({
           next: (usuario) => {
-            sessionStorage.setItem('token', usuario.contraseña);
-            sessionStorage.setItem('Username', usuario.nombreUsuario);
+            localStorage.setItem('token', usuario.contraseña);
+            localStorage.setItem('Username', usuario.nombreUsuario);
 
             this.error = 'Te has registrado correctamente!';
             window.setTimeout(() => {
-              window.location.href = "/peliculas"
+              window.location.href = '/peliculas';
             }, 2000);
           },
           error: (err) => {
@@ -69,7 +68,9 @@ export class RegistraUsuarioComponent implements OnInit {
     }
   };
 
-  volver(): void {
-    window.location.href = '/';
+  ngOnDestroy(): void {
+    if (this.subscripcion) {
+      this.subscripcion.unsubscribe();
+    }
   }
 }

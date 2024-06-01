@@ -35,11 +35,10 @@ export class authGuard {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Promise<boolean> {
-    if (
-      !window.sessionStorage.getItem('token') ||
-      !window.sessionStorage.getItem('Username')
-    ) {
-      this.route.navigateByUrl('inicioSesion');
+    if (!localStorage.getItem('token') || !localStorage.getItem('Username')) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('Username');
+      window.location.href = 'inicioSesion';
       return false;
     }
     try {
@@ -48,7 +47,9 @@ export class authGuard {
       console.log('Error verificando el token');
     }
     if (!this.tokenValido) {
-      this.route.navigateByUrl('inicioSesion');
+      localStorage.removeItem('token');
+      localStorage.removeItem('Username');
+      window.location.href = 'inicioSesion';
     }
 
     return this.tokenValido;

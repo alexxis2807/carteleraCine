@@ -13,8 +13,8 @@ export class JwtInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    const jwt = sessionStorage.getItem('token');
-    const username = sessionStorage.getItem('Username');
+    const jwt = localStorage.getItem('token');
+    const username = localStorage.getItem('Username');
 
     if (jwt && username) {
       request = request.clone({
