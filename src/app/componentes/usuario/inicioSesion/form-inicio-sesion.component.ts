@@ -6,7 +6,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { UsuarioService } from '../../../servicios/usuario.service';
-import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-form-inicio-sesion',
@@ -15,10 +14,9 @@ import { Subscription, interval } from 'rxjs';
   templateUrl: './form-inicio-sesion.component.html',
   styleUrl: './form-inicio-sesion.component.scss',
 })
-export class FormInicioSesionComponent implements OnInit, OnDestroy {
+export class FormInicioSesionComponent implements OnInit {
   formInicio!: FormGroup;
   error = '';
-  subscripcion!: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -58,12 +56,6 @@ export class FormInicioSesionComponent implements OnInit, OnDestroy {
       this.error = 'El nombre de usuario es obligatorio';
     } else if (form.contraseña == '') {
       this.error = 'La contraseña es obligatoria';
-    }
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscripcion) {
-      this.subscripcion.unsubscribe();
     }
   }
 }

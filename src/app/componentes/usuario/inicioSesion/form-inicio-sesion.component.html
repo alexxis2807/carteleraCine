@@ -1,31 +1,40 @@
-<p>INICIO DE SESION</p>
-<form
-  [formGroup]="formInicio"
-  class="flex flex-col justify-between w-[350px] gap-5"
->
-  <div class="flex justify-between items-center">
-    <label for="nombreUsuario">Nombre Usuario: </label>
-    <input
-      type="text"
-      id="nombreUsuario"
-      formControlName="nombreUsuario"
-      class="border border-cyan-900"
-    />
-  </div>
-  <div class="flex justify-between items-center">
-    <label for="contraseña">Contraseña: </label>
-    <input
-      type="password"
-      id="contraseña"
-      formControlName="contraseña"
-      class="border border-cyan-900"
-    />
-  </div>
-  <button (click)="inicioSesion()" class="border border-cyan-300 rounded w-20">
-    Aceptar
-  </button>
-</form>
+<div class="flex flex-col items-center mt-10">
+  <p class="text-2xl font-bold text-terciario mb-5">INICIO DE SESIÓN</p>
+  <form
+    [formGroup]="formInicio"
+    class="flex flex-col justify-between w-[350px] gap-5 bg-gray-light p-6 rounded shadow-lg"
+  >
+    <div class="flex flex-col mb-4">
+      <label for="nombreUsuario" class="mb-2 text-primary font-semibold"
+        >Nombre de Usuario</label
+      >
+      <input
+        type="text"
+        id="nombreUsuario"
+        formControlName="nombreUsuario"
+        class="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+      />
+    </div>
+    <div class="flex flex-col mb-4">
+      <label for="contraseña" class="mb-2 text-primary font-semibold"
+        >Contraseña</label
+      >
+      <input
+        type="password"
+        id="contraseña"
+        formControlName="contraseña"
+        class="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+      />
+    </div>
+    <button
+      (click)="inicioSesion()"
+      class="bg-tertiary-steel text-white hover:text-white py-2 px-4 rounded hover:bg-terciario focus:outline-none focus:ring-2 focus:ring-secondary"
+    >
+      Aceptar
+    </button>
+  </form>
 
-@if (error) {
-  <p>{{ error }}</p>
-}
+  @if (error) {
+    <p class="mt-4 text-red-600">{{ error }}</p>
+  }
+</div>

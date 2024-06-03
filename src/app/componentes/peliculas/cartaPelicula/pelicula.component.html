@@ -1,10 +1,14 @@
 <div
-  class="flex flex-col items-center text-center bg-color-terciario border border-red-900 w-52 mb-10 cursor-pointer"
+  class="flex flex-col items-center text-center hover:bg-tertiary-steel bg-terciario border border-border-dark w-52 mb-10 cursor-pointer rounded overflow-hidden shadow-lg"
   routerLink="/peliculas/detalles/{{ idPelicula }}"
 >
-  <h3 class="min-h-24 flex items-center p-2">{{ tituloPelicula }}</h3>
+  <h3
+    class="min-h-32 text-xl flex items-center justify-center p-2 text-white font-semibold"
+  >
+    {{ tituloPelicula }}
+  </h3>
   <div
-  class="w-52 h-80"
-  style="background-image: url('{{ urlImagenes }}{{urlPortadaPelicula}}'); background-size: cover; background-position: center;"
-></div>
+    class="w-52 h-80 bg-cover bg-center"
+    style="background-image: url('{{ urlImagenes }}{{ urlPortadaPelicula }}');"
+  ></div>
 </div>

@@ -20,7 +20,7 @@ export const routes: Routes = [
     component: PeliculasPopularComponent,
     canActivate: [AuthGuard],
   },
-  //{ path: 'peliculas/api', component: PeliculaApiComponent },
+  { path: 'peliculas/api', component: PeliculaApiComponent },
   {
     path: 'peliculas',
     component: TodasPeliculasComponent,
@@ -46,4 +46,8 @@ export const routes: Routes = [
     component: MisEntradasComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: "**",
+    redirectTo: "/peliculas"
+  }
 ];

@@ -1,7 +1,7 @@
-<div class="p-8 bg-color-secundario mb-5">
-  <h1 class="titulo-cabecera">PELICULAS</h1>
+<div class="p-8 bg-secondary mb-5">
+  <h1 class="titulo-cabecera text-3xl font-semibold">PELÍCULAS</h1>
 </div>
-<div class="flex flex-wrap justify-between">
+<div class="peliculas-grid">
   @for (pelicula of peliculas; track pelicula.id) {
     <app-pelicula
       [idPelicula]="pelicula.id"

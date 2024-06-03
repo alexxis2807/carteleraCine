@@ -1,15 +1,31 @@
-@if (entradasUsuario) {
-  <h1 class="text-center text-2xl">MIS ENTRADAS</h1>
-  <div class="flex flex-col items-center gap-5">
+@if (entradasUsuario && entradasUsuario.length > 0) {
+  <div class="bg-secondary p-8 mb-5">
+    <h1 class="titulo-cabecera text-3xl font-semibold">MIS ENTRADAS</h1>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
     @for (entrada of entradasUsuario; track entrada.id) {
-      <div>
-        {{ entrada.sesionPelicula.pelicula.titulo }} - Asiento:
-        {{ entrada.numeroAsiento }} - Precio: {{ entrada.precio }} - Sala:
-        {{ entrada.sesionPelicula.sala.id }} - Fecha:
-        {{ entrada.sesionPelicula.fecha }} - Hora:
-        {{ entrada.sesionPelicula.horaInicio }}
+      <div class="bg-gray-100 p-4 rounded-lg shadow-md">
+        <p class="text-lg font-semibold text-tertiary">
+          {{ entrada.sesionPelicula.pelicula.titulo }}
+        </p>
+        <div class="flex flex-wrap gap-1">
+          <p class="text-base text-gray-700">
+            Asiento: {{ entrada.numeroAsiento }}
+          </p>
+          <p class="text-base text-gray-700">Precio: {{ entrada.precio }}</p>
+          <p class="text-base text-gray-700">
+            Sala: {{ entrada.sesionPelicula.sala.id }}
+          </p>
+          <p class="text-base text-gray-700">
+            Fecha: {{ entrada.sesionPelicula.fecha }}
+          </p>
+          <p class="text-base text-gray-700">
+            Hora: {{ entrada.sesionPelicula.horaInicio }}
+          </p>
+        </div>
         <button
-          class="bg-red-600 p-2 rounded-lg"
+          class="bg-red-600 text-white py-2 px-4 rounded-md mt-2"
           (click)="eliminarEntrada(entrada.id)"
         >
           Eliminar
@@ -18,13 +34,13 @@
     }
   </div>
 } @else {
-  <div class="flex flex-col gap-10 w-96 items-center m-auto p-5">
-    <h1 class="text-2xl">NO TIENES ENTRADAS</h1>
+  <div class="flex flex-col items-center justify-center h-96">
+    <h1 class="text-3xl mb-5">NO TIENES ENTRADAS</h1>
     <button
-      class="text-xl text-white bg-blue-700 p-5 rounded-md"
+      class="text-xl bg-primary py-3 px-6 rounded-md shadow-md hover:bg-secondary"
       routerLink="/peliculas"
     >
-      PELICULAS
+      PELÍCULAS
     </button>
   </div>
 }

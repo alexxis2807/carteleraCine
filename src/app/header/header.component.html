@@ -1,50 +1,51 @@
-<div class="w-full bg-color-primario h-20 flex">
-  @if (haySesion) {
-    <button
-      routerLinkActive="bg-green-400 hover:bg-green-400 "
-      cursor-auto
-      [routerLinkActiveOptions]="{ exact: true }"
-      class="py-5 px-10 hover:bg-blue-300"
-      routerLink="/peliculas"
-    >
-      Películas
-    </button>
-    <button
-      routerLinkActive="bg-green-400 hover:bg-green-400 cursor-auto"
-      class="py-5 px-10 hover:bg-blue-300"
-      routerLink="/peliculas/populares"
-    >
-      Populares
-    </button>
-    <button
-      routerLinkActive="bg-green-400 hover:bg-green-400 cursor-auto"
-      class="py-5 px-10 hover:bg-blue-300"
-      routerLink="/misEntradas"
-    >
-      Mis entradas
-    </button>
+<div class="w-full bg-primary h-20 flex items-center justify-between px-10">
+  <div class="text-xl font-bold">Cartelera de Cine</div>
 
-    <button
-      routerLinkActive="bg-green-400 hover:bg-green-400 cursor-auto"
-      class="py-5 px-10 hover:bg-blue-300"
-      (click)="cerrarSesion()"
-    >
-      Cerrar Sesion
-    </button>
-  } @else {
-    <button
-      routerLinkActive="bg-green-400 hover:bg-green-400 cursor-auto"
-      class="py-5 px-10 hover:bg-blue-300"
-      routerLink="/inicioSesion"
-    >
-      Inicio de sesion
-    </button>
-    <button
-      routerLinkActive="bg-green-400 hover:bg-green-400 cursor-auto"
-      class="py-5 px-10 hover:bg-blue-300"
-      routerLink="/registro"
-    >
-      Registrarse
-    </button>
-  }
+  <div class="flex space-x-4">
+    @if (haySesion) {
+      <button
+        routerLinkActive=" bg-terciario text-white cursor-auto hover:bg-tertiary"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="py-2 px-4 hover:bg-tertiary-steel hover:text-white rounded"
+        routerLink="/peliculas"
+      >
+        Películas
+      </button>
+      <button
+        routerLinkActive=" bg-terciario text-white cursor-auto hover:bg-tertiary"
+        class="py-2 px-4 hover:bg-tertiary-steel hover:text-white rounded"
+        routerLink="/peliculas/populares"
+      >
+        Populares
+      </button>
+      <button
+        routerLinkActive=" bg-terciario text-white cursor-auto hover:bg-tertiary"
+        class="py-2 px-4 hover:bg-tertiary-steel hover:text-white rounded"
+        routerLink="/misEntradas"
+      >
+        Mis entradas
+      </button>
+      <button
+        class="py-2 px-4 bg-red-600 hover:bg-red-700 rounded text-white"
+        (click)="cerrarSesion()"
+      >
+        Cerrar Sesión
+      </button>
+    } @else {
+      <button
+        routerLinkActive=" bg-terciario text-white cursor-auto hover:bg-tertiary"
+        class="py-2 px-4 hover:bg-tertiary-steel hover:text-white rounded"
+        routerLink="/inicioSesion"
+      >
+        Inicio de sesión
+      </button>
+      <button
+        routerLinkActive=" bg-terciario text-white cursor-auto hover:bg-tertiary"
+        class="py-2 px-4 hover:bg-tertiary-steel hover:text-white rounded"
+        routerLink="/registro"
+      >
+        Registrarse
+      </button>
+    }
+  </div>
 </div>

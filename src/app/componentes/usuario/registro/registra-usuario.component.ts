@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { FormUsuarioComponent } from '../formularioUsuario/form-usuario.component';
 import { UsuarioService } from '../../../servicios/usuario.service';
-import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-registra-usuario',
@@ -16,12 +15,12 @@ import { Subscription, interval } from 'rxjs';
   templateUrl: './registra-usuario.component.html',
   styleUrl: './registra-usuario.component.scss',
 })
-export class RegistraUsuarioComponent implements OnInit, OnDestroy {
+export class RegistraUsuarioComponent implements OnInit {
   formUsuario!: FormGroup;
   textoSubmit = 'Registrar';
   registrar!: Function;
   error = '';
-  subscripcion!: Subscription;
+  exito = '';
 
   constructor(
     private fb: FormBuilder,
@@ -52,8 +51,8 @@ export class RegistraUsuarioComponent implements OnInit, OnDestroy {
           next: (usuario) => {
             localStorage.setItem('token', usuario.contraseña);
             localStorage.setItem('Username', usuario.nombreUsuario);
-
-            this.error = 'Te has registrado correctamente!';
+            this.error = '';
+            this.exito = 'Te has registrado correctamente!';
             window.setTimeout(() => {
               window.location.href = '/peliculas';
             }, 2000);
@@ -67,10 +66,4 @@ export class RegistraUsuarioComponent implements OnInit, OnDestroy {
       this.error = 'Todos los campos son obligatorios';
     }
   };
-
-  ngOnDestroy(): void {
-    if (this.subscripcion) {
-      this.subscripcion.unsubscribe();
-    }
-  }
 }

@@ -5,11 +5,12 @@ import { environment } from '../../../../assets/environments';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Peliculas, SesionPelicula } from '../../../interfaces';
 import { SesionPeliculaService } from '../../../servicios/sesion-pelicula.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-pelicula-detalles',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './pelicula-detalles.component.html',
   styleUrl: './pelicula-detalles.component.scss',
 })
@@ -37,6 +38,7 @@ export class PeliculaDetallesComponent implements OnInit {
     this.peliculasServicio.obtenerDetallesPelicula(this.idPelicula).subscribe({
       next: (detalles) => {
         this.detallesPelicula = detalles;
+        console.log(detalles);
       },
       complete: () => {
         this.obtenerURLSegura();
