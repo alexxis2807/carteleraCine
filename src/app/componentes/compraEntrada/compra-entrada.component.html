@@ -1,51 +1,72 @@
 @if (entradas) {
-  <div class="flex justify-center items-center p-9">
-    <h1 class="text-center text-2xl">
-      {{ entradas[0].sesionPelicula.pelicula.titulo.toLocaleUpperCase() }}
+  <div class="flex flex-col justify-center items-center p-9">
+    <h1 class="text-center text-4xl font-bold text-primary mb-5 uppercase">
+      {{ entradas[0].sesionPelicula.pelicula.titulo }}
     </h1>
-  </div>
-  <div>
-    <p>
-      Tiempo restante: {{ minutes }}:{{
-        seconds < 10 ? "0" + seconds : seconds
-      }}
-    </p>
-    <!-- Aquí va el resto de tu código de selección de asientos -->
-  </div>
-  <div
-    class="flex flex-col items-center gap-10 w-[40rem] p-5 rounded-xl bg-green-100 m-auto"
-  >
-    <h2>Detalles de los Asientos</h2>
-    <div class="flex flex-col gap-3">
-      @for (entrada of entradas; track entrada.id) {
-        <div>
-          Asiento: {{ entrada.numeroAsiento }} - ID Sesión:
-          {{ entrada.sesionPelicula.id }} Precio: {{ entrada.precio }} Sala:
-          {{ entrada.sesionPelicula.sala.id }} Fecha:
-          {{ entrada.sesionPelicula.fecha }} Hora:
-          {{ entrada.sesionPelicula.horaInicio }}
-        </div>
-      }
+    <div class="text-xl mb-5">
+      <p>
+        Tiempo restante:
+        <span class="font-mono"
+          >{{ minutes }}:{{ seconds < 10 ? "0" + seconds : seconds }}</span
+        >
+      </p>
     </div>
-    <div>
-      <p>TOTAL A PAGAR: {{ totalCompra }} €</p>
+
+    <div
+      class="flex flex-col items-center gap-10 w-full max-w-[50rem] p-8 rounded-xl bg-secondary text-white shadow-lg"
+    >
+      <h2 class="text-3xl font-semibold">Detalles de los Asientos</h2>
+      <div class="w-full">
+        @for (entrada of entradas; track entrada.id) {
+          <div
+            class="flex justify-between flex-wrap p-3 mb-2 bg-tertiary rounded-lg shadow-sm"
+          >
+            <div>
+              Asiento:
+              <span class="font-bold">{{ entrada.numeroAsiento }}</span>
+            </div>
+            <div>
+              Precio: <span class="font-bold">{{ entrada.precio }} €</span>
+            </div>
+            <div>
+              Sala:
+              <span class="font-bold">{{
+                entrada.sesionPelicula.sala.id
+              }}</span>
+            </div>
+            <div>
+              Fecha:
+              <span class="font-bold">{{ entrada.sesionPelicula.fecha }}</span>
+            </div>
+            <div>
+              Hora:
+              <span class="font-bold">{{
+                entrada.sesionPelicula.horaInicio
+              }}</span>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="text-2xl font-bold">
+        <p>TOTAL A PAGAR: {{ totalCompra }} €</p>
+      </div>
+      <div class="flex gap-10 mt-5">
+        <button
+          class="bg-primary text-white rounded-lg px-5 py-2 shadow-md hover:bg-tertiary transition"
+          (click)="realizarCompra()"
+        >
+          PAGAR
+        </button>
+        <button
+          class="bg-primary text-white rounded-lg px-5 py-2 shadow-md hover:bg-tertiary transition"
+          (click)="cancelarEntradas()"
+        >
+          CANCELAR COMPRA
+        </button>
+      </div>
     </div>
-    <div class="flex gap-10">
-      <button
-        class="bg-cyan-200 rounded-lg px-5 py-2"
-        (click)="realizarCompra()"
-      >
-        PAGAR
-      </button>
-      <button
-        class="bg-cyan-200 rounded-lg px-5 py-2"
-        (click)="cancelarEntradas()"
-      >
-        CANCELAR COMPRA
-      </button>
-    </div>
+    @if (mensajeExitoCompra) {
+      <h1 class="text-xl text-green-600 mt-5">{{ mensajeExitoCompra }}</h1>
+    }
   </div>
-  @if (mensajeExitoCompra) {
-    <h1 class="text-xl text-green-600">{{ mensajeExitoCompra }}</h1>
-  }
 }

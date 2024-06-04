@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
 })
 export class MisEntradasComponent implements OnInit {
   nombreUsuario = localStorage.getItem('Username') || '';
-  entradasUsuario!: Entrada[];
+  entradasUsuario: Entrada[] = [];
 
   constructor(private entradaServicio: EntradaService) {}
 

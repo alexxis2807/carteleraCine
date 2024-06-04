@@ -12,7 +12,7 @@ import { EntradaService } from '../../servicios/entrada.service';
   styleUrl: './compra-entrada.component.scss',
 })
 export class CompraEntradaComponent implements OnInit, OnDestroy {
-  tiempoSesion: number = 30;
+  tiempoSesion: number = 60;
   interval: any;
   seHaRealizadoCompra = false;
 
@@ -59,6 +59,9 @@ export class CompraEntradaComponent implements OnInit, OnDestroy {
       this.entradaServicio.eliminarEntrada(entrada.id).subscribe();
     });
     localStorage.removeItem('entradasEnProceso');
+    localStorage.removeItem('tiempoSesion');
+    clearInterval(this.interval);
+
     window.location.href =
       '/reservaSesion/' + this.entradas[0].sesionPelicula.id;
   }

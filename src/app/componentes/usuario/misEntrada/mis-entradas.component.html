@@ -1,46 +1,50 @@
-@if (entradasUsuario && entradasUsuario.length > 0) {
-  <div class="bg-secondary p-8 mb-5">
-    <h1 class="titulo-cabecera text-3xl font-semibold">MIS ENTRADAS</h1>
-  </div>
+<div class="px-10">
+  @if (entradasUsuario && entradasUsuario.length > 0) {
+    <div class="p-8 mb-5">
+      <h1 class="text-center text-4xl font-bold text-primary mb-5">
+        MIS ENTRADAS
+      </h1>
+    </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-    @for (entrada of entradasUsuario; track entrada.id) {
-      <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-        <p class="text-lg font-semibold text-tertiary">
-          {{ entrada.sesionPelicula.pelicula.titulo }}
-        </p>
-        <div class="flex flex-wrap gap-1">
-          <p class="text-base text-gray-700">
-            Asiento: {{ entrada.numeroAsiento }}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      @for (entrada of entradasUsuario; track entrada.id) {
+        <div class="bg-gray-100 p-4 rounded-lg shadow-md">
+          <p class="text-lg font-semibold text-tertiary">
+            {{ entrada.sesionPelicula.pelicula.titulo }}
           </p>
-          <p class="text-base text-gray-700">Precio: {{ entrada.precio }}</p>
-          <p class="text-base text-gray-700">
-            Sala: {{ entrada.sesionPelicula.sala.id }}
-          </p>
-          <p class="text-base text-gray-700">
-            Fecha: {{ entrada.sesionPelicula.fecha }}
-          </p>
-          <p class="text-base text-gray-700">
-            Hora: {{ entrada.sesionPelicula.horaInicio }}
-          </p>
+          <div class="flex flex-wrap gap-1">
+            <p class="text-base text-gray-700">
+              Asiento: {{ entrada.numeroAsiento }}
+            </p>
+            <p class="text-base text-gray-700">Precio: {{ entrada.precio }}</p>
+            <p class="text-base text-gray-700">
+              Sala: {{ entrada.sesionPelicula.sala.id }}
+            </p>
+            <p class="text-base text-gray-700">
+              Fecha: {{ entrada.sesionPelicula.fecha }}
+            </p>
+            <p class="text-base text-gray-700">
+              Hora: {{ entrada.sesionPelicula.horaInicio }}
+            </p>
+          </div>
+          <button
+            class="bg-red-600 hover:bg-red-500 text-white py-2 px-4 rounded-md mt-2"
+            (click)="eliminarEntrada(entrada.id)"
+          >
+            Eliminar
+          </button>
         </div>
-        <button
-          class="bg-red-600 text-white py-2 px-4 rounded-md mt-2"
-          (click)="eliminarEntrada(entrada.id)"
-        >
-          Eliminar
-        </button>
-      </div>
-    }
-  </div>
-} @else {
-  <div class="flex flex-col items-center justify-center h-96">
-    <h1 class="text-3xl mb-5">NO TIENES ENTRADAS</h1>
-    <button
-      class="text-xl bg-primary py-3 px-6 rounded-md shadow-md hover:bg-secondary"
-      routerLink="/peliculas"
-    >
-      PELÍCULAS
-    </button>
-  </div>
-}
+      }
+    </div>
+  } @else {
+    <div class="flex flex-col items-center justify-center h-96">
+      <h1 class="text-3xl mb-5">NO TIENES ENTRADAS</h1>
+      <button
+        class="text-xl bg-primary py-3 px-6 rounded-md shadow-md hover:bg-secondary"
+        routerLink="/peliculas"
+      >
+        PELÍCULAS
+      </button>
+    </div>
+  }
+</div>

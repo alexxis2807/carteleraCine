@@ -1,62 +1,71 @@
-@if (detallesPelicula) {
-  <div class="w-full h-full">
-    <div class="bg-secondary flex text-white">
-      <img src="{{ urlImagenes }}{{ detallesPelicula.rutaPoster }}" alt="" />
-      <div class="flex flex-col p-5">
-        <h1 class="titulo-cabecera">{{ detallesPelicula.titulo }}</h1>
-
-        <div>
-          <p>{{ detallesPelicula.resumen }}</p>
-          <div class="flex gap-5">
-            @for (
-              genero of detallesPelicula.generos;
-              track detallesPelicula.id
-            ) {
-              <p>{{ genero.nombre }}</p>
-            }
-            <p>{{ detallesPelicula.fechaEstreno }}</p>
-            <div>Valoración: {{ detallesPelicula.promedioVotos }}</div>
-            <div>Duración: {{ detallesPelicula.duracion }} min</div>
-          </div>
-        </div>
+<div class="w-full h-full p-4">
+  <div
+    class="bg-secondary flex text-white rounded-lg shadow-lg overflow-hidden"
+  >
+    <img
+      src="{{ urlImagenes }}{{ detallesPelicula.rutaPoster }}"
+      alt=""
+      class="w-1/6 object-cover"
+    />
+    <div class="flex flex-col w-5/6 gap-10 px-20 py-5">
+      <h1 class="text-4xl font-bold mb-3">{{ detallesPelicula.titulo }}</h1>
+      <p class="mb-4">{{ detallesPelicula.resumen }}</p>
+      <div class="flex flex-wrap gap-3 mb-4">
+        @for (genero of detallesPelicula.generos; track detallesPelicula.id) {
+          <span class="bg-tertiary-steel text-white py-1 px-3 rounded-full">{{
+            genero.nombre
+          }}</span>
+        }
+        <span class="bg-gray-700 text-white py-1 px-3 rounded-full">{{
+          detallesPelicula.fechaEstreno
+        }}</span>
+        <span class="bg-gray-700 text-white py-1 px-3 rounded-full"
+          >Valoración: {{ detallesPelicula.promedioVotos }}</span
+        >
+        <span class="bg-gray-700 text-white py-1 px-3 rounded-full"
+          >Duración: {{ detallesPelicula.duracion }} min</span
+        >
       </div>
     </div>
+  </div>
 
+  <div class="mt-8 flex justify-center">
     <iframe
       [src]="trailerUrl"
-      width="560"
+      width="50%"
       height="315"
       frameborder="0"
       allowfullscreen
+      class="rounded-lg shadow-lg"
     ></iframe>
-
-    <div class="overflow-x-auto flex w-full">
-      @for (fecha of fechasSesiones; track $index) {
-        <button
-          (click)="obtenerSesionesPorFecha(fecha, detallesPelicula.id)"
-          class="bg-cyan-400 border border-black min-w-40 h-20"
-        >
-          {{ fecha }}
-        </button>
-      }
-    </div>
-    @if (sesionesPorFecha) {
-      <div class="flex flex-col items-center">
-        <h1>ELIGE LA MEJOR HORA</h1>
-        <h1>Fecha: {{ fechaElegida }}</h1>
-        <div class="flex gap-10">
-          @for (sesion of sesionesPorFecha; track sesion.id) {
-            <button
-              class="w-40 h-20 bg-cyan-200 flex flex-col items-center justify-center"
-              routerLink="/reservaSesion/{{ sesion.id }}"
-            >
-              <p>{{ sesion.horaInicio }}</p>
-              <p>{{ sesion.precio }}€</p>
-              <p>{{ sesion.id }}</p>
-            </button>
-          }
-        </div>
-      </div>
+  </div>
+  <div class="overflow-x-auto flex mt-8 space-x-4 pb-4">
+    @for (fecha of fechasSesiones; track $index) {
+      <button
+        (click)="obtenerSesionesPorFecha(fecha, detallesPelicula.id)"
+        class="bg-primary text-white border border-dark min-w-40 h-20 rounded-lg shadow-md hover:bg-secondary transition"
+        [ngClass]="{ 'bg-secondary': fecha === fechaElegida }"
+      >
+        {{ fecha }}
+      </button>
     }
   </div>
-}
+
+  @if (sesionesPorFecha) {
+    <div class="flex flex-col items-center mt-8 pb-10">
+      <h1 class="text-2xl font-bold mb-2">ELIGE LA MEJOR HORA</h1>
+      <h1 class="text-xl font-semibold mb-4">Fecha: {{ fechaElegida }}</h1>
+      <div class="flex gap-4 flex-wrap justify-center">
+        @for (sesion of sesionesPorFecha; track sesion.id) {
+          <button
+            class="w-40 h-20 bg-primary text-white flex flex-col items-center justify-center rounded-lg shadow-md hover:bg-terciario transition"
+            routerLink="/reservaSesion/{{ sesion.id }}"
+          >
+            <p class="text-lg">{{ sesion.horaInicio }}</p>
+            <p class="text-md">{{ sesion.precio }}€</p>
+          </button>
+        }
+      </div>
+    </div>
+  }
+</div>

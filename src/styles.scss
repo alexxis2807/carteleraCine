@@ -2,6 +2,16 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.titulo-cabecera{
-    @apply font-medium text-5xl text-center;
+.titulo-cabecera {
+  @apply font-medium text-5xl text-center;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  @apply bg-gray-light;
 }
