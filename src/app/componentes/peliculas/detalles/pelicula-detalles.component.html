@@ -1,13 +1,13 @@
-<div class="w-full h-full p-4">
+<div class="w-4/5 m-auto h-full p-4">
   <div
     class="bg-secondary flex text-white rounded-lg shadow-lg overflow-hidden"
   >
     <img
       src="{{ urlImagenes }}{{ detallesPelicula.rutaPoster }}"
       alt=""
-      class="w-1/6 object-cover"
+      class="w-52 object-cover"
     />
-    <div class="flex flex-col w-5/6 gap-10 px-20 py-5">
+    <div class="flex flex-col w-[50rem] gap-10 px-20 py-5">
       <h1 class="text-4xl font-bold mb-3">{{ detallesPelicula.titulo }}</h1>
       <p class="mb-4">{{ detallesPelicula.resumen }}</p>
       <div class="flex flex-wrap gap-3 mb-4">
@@ -32,8 +32,8 @@
   <div class="mt-8 flex justify-center">
     <iframe
       [src]="trailerUrl"
-      width="50%"
-      height="315"
+      width="70%"
+      height="400"
       frameborder="0"
       allowfullscreen
       class="rounded-lg shadow-lg"

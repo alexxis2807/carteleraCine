@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiPeliculaService } from '../../servicios/api-pelicula.service';
-import { Pelicula, Peliculas } from '../../interfaces';
+import { PeliculaApi, Pelicula } from '../../interfaces';
 import { PeliculasService } from '../../servicios/peliculas.service';
 import { SesionPeliculaService } from '../../servicios/sesion-pelicula.service';
 import { SalaService } from '../../servicios/sala.service';
@@ -333,7 +333,7 @@ export class PeliculaApiComponent implements OnInit {
     for (let index = 1; index <= 5; index++) {
       this.apiService.obtenerPeliculasApi(index).subscribe({
         next: (peliculas) => {
-          peliculas.forEach((pelicula: Pelicula) => {
+          peliculas.forEach((pelicula: PeliculaApi) => {
             this.apiService.obtenerDetallesPelicula(pelicula.id).subscribe({
               next: (peli) => {
                 this.apiService.obtenerTrailerPelicula(peli.id).subscribe({

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../assets/environments';
 import {
-  Peliculas,
+  Pelicula,
   Sala,
   SesionPelicula,
   SesionPeliculaRequest,
@@ -17,7 +17,7 @@ export class SesionPeliculaService {
   constructor(private http: HttpClient) {}
 
   guardarSesion(
-    peliculaSesion: Peliculas,
+    peliculaSesion: Pelicula,
     salaSesion: Sala,
     fechaSesion: string,
     horaInicioSesion: string,

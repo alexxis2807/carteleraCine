@@ -13,7 +13,7 @@ export interface DetallePoster {
   rutaPoster: string;
 }
 
-export interface Pelicula {
+export interface PeliculaApi {
   id: number;
   adult: boolean;
   backdrop_path: string;
@@ -37,7 +37,7 @@ export interface Genero {
   nombre: string;
 }
 
-export interface Peliculas {
+export interface Pelicula {
   id: number;
   adulto: boolean;
   rutaFondo?: string;
@@ -64,7 +64,7 @@ export interface Sala {
 }
 
 export interface SesionPeliculaRequest {
-  pelicula: Peliculas;
+  pelicula: Pelicula;
   sala: Sala;
   fecha: string;
   horaInicio: string;
@@ -74,7 +74,7 @@ export interface SesionPeliculaRequest {
 
 export interface SesionPelicula {
   id: number;
-  pelicula: Peliculas;
+  pelicula: Pelicula;
   sala: Sala;
   fecha: string;
   horaInicio: string;

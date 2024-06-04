@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PeliculasService } from '../../../servicios/peliculas.service';
-import { DetallePoster, Pelicula } from '../../../interfaces';
+import { DetallePoster, PeliculaApi } from '../../../interfaces';
 import { PeliculaComponent } from '../cartaPelicula/pelicula.component';
 
 @Component({
@@ -18,10 +18,8 @@ export class PeliculasPopularComponent implements OnInit {
   constructor(private peliculaService: PeliculasService) {}
 
   ngOnInit(): void {
-    this.peliculaService.obtenerPosterPeliculasPopulares().subscribe({
-      next: (peliculasEncontradas) => {
-        this.peliculas = peliculasEncontradas;
-      },
-    });
+    this.peliculaService
+      .obtenerPosterPeliculasPopulares()
+      .subscribe((pelis) => (this.peliculas = pelis));
   }
 }

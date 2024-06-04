@@ -3,7 +3,7 @@ import { PeliculasService } from '../../../servicios/peliculas.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { environment } from '../../../../assets/environments';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Peliculas, SesionPelicula } from '../../../interfaces';
+import { Pelicula, SesionPelicula } from '../../../interfaces';
 import { SesionPeliculaService } from '../../../servicios/sesion-pelicula.service';
 import { CommonModule } from '@angular/common';
 
@@ -20,7 +20,7 @@ export class PeliculaDetallesComponent implements OnInit {
   modalActivado = false;
 
   idPelicula!: number;
-  detallesPelicula!: Peliculas;
+  detallesPelicula!: Pelicula;
   trailerUrl!: SafeResourceUrl;
   fechasSesiones!: string[];
   sesionesPorFecha!: SesionPelicula[];
@@ -35,16 +35,13 @@ export class PeliculaDetallesComponent implements OnInit {
 
   ngOnInit(): void {
     this.idPelicula = Number(this.route.snapshot.paramMap.get('idPelicula'));
-    this.peliculasServicio.obtenerDetallesPelicula(this.idPelicula).subscribe({
-      next: (detalles) => {
-        this.detallesPelicula = detalles;
-        console.log(detalles);
-      },
-      complete: () => {
+    this.peliculasServicio
+      .obtenerDetallesPelicula(this.idPelicula)
+      .subscribe((data) => {
+        this.detallesPelicula = data;
         this.obtenerURLSegura();
-        this.obtenerFechasSesiones(this.detallesPelicula.id);
-      },
-    });
+        this.obtenerFechasSesiones(data.id);
+      });
   }
 
   obtenerURLSegura() {

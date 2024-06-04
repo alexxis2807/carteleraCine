@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PeliculasService } from '../../../servicios/peliculas.service';
-import { DetallePoster, Peliculas } from '../../../interfaces';
+import { DetallePoster, Pelicula } from '../../../interfaces';
 import { PeliculaComponent } from '../cartaPelicula/pelicula.component';
 
 @Component({
@@ -14,10 +14,8 @@ export class TodasPeliculasComponent implements OnInit {
   peliculas!: DetallePoster[];
   constructor(private peliculaService: PeliculasService) {}
   ngOnInit(): void {
-    this.peliculaService.obtenerPosterPeliculas().subscribe({
-      next: (pelis) => {
-        this.peliculas = pelis;
-      },
-    });
+    this.peliculaService
+      .obtenerPosterPeliculas()
+      .subscribe((pelis) => (this.peliculas = pelis));
   }
 }

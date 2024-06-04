@@ -1,31 +1,62 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../assets/environments';
-import { Observable, map } from 'rxjs';
-import { Pelicula, Peliculas } from '../interfaces';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
+import { PeliculaApi, Pelicula } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PeliculasService {
   private url = environment.urlPeliculasBbdd;
-  private urlImagenes = environment.urlApiImagenes;
 
+  private peliculasSubject = new BehaviorSubject<Pelicula[]>([]);
+  private popularesSubject = new BehaviorSubject<Pelicula[]>([]);
+  private detallesSubject = new BehaviorSubject<{ [id: number]: Pelicula }>({});
+
+  peliculas$ = this.peliculasSubject.asObservable();
+  populares$ = this.popularesSubject.asObservable();
   constructor(private http: HttpClient) {}
 
-  public obtenerPosterPeliculas(): Observable<Peliculas[]> {
-    return this.http.get<Peliculas[]>(this.url + '/posters');
+  public obtenerPosterPeliculas(): Observable<Pelicula[]> {
+    if (this.peliculasSubject.value.length === 0) {
+      this.http
+        .get<Pelicula[]>(this.url + '/posters')
+        .pipe(tap((peliculas) => this.peliculasSubject.next(peliculas)))
+        .subscribe();
+    }
+    return this.peliculas$;
   }
 
-  public obtenerPosterPeliculasPopulares(): Observable<Peliculas[]> {
-    return this.http.get<Peliculas[]>(this.url + '/posters/populares');
+  public obtenerPosterPeliculasPopulares(): Observable<Pelicula[]> {
+    if (this.popularesSubject.value.length === 0) {
+      this.http
+        .get<Pelicula[]>(this.url + '/posters/populares')
+        .pipe(tap((peliculas) => this.popularesSubject.next(peliculas)))
+        .subscribe();
+    }
+    return this.populares$;
   }
 
-  public obtenerDetallesPelicula(idPelicula: number): Observable<Peliculas> {
-    return this.http.get<Peliculas>(this.url + '/detalles/' + idPelicula);
+  public obtenerDetallesPelicula(idPelicula: number): Observable<Pelicula> {
+    if (!this.detallesSubject.value[idPelicula]) {
+      this.http
+        .get<Pelicula>(this.url + '/detalles/' + idPelicula)
+        .pipe(
+          tap((detalle) => {
+            const detalles = this.detallesSubject.value;
+            detalles[idPelicula] = detalle;
+            this.detallesSubject.next(detalles);
+          }),
+        )
+        .subscribe();
+    }
+    return this.detallesSubject
+      .asObservable()
+      .pipe(map((detalles) => detalles[idPelicula]));
   }
 
-  public obtenerPeliculas(): Observable<Peliculas[]> {
-    return this.http.get<Peliculas[]>(this.url + '/detalles');
+  public obtenerPeliculas(): Observable<Pelicula[]> {
+    return this.http.get<Pelicula[]>(this.url + '/detalles');
   }
 }

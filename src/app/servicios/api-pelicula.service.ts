@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../assets/environments';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
-import { Pelicula, Peliculas } from '../interfaces';
+import { PeliculaApi, Pelicula } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -72,14 +72,14 @@ export class ApiPeliculaService {
       );
   }
 
-  public obtenerDetallesPelicula(idPelicula: number): Observable<Pelicula> {
-    return this.http.get<Pelicula>(
+  public obtenerDetallesPelicula(idPelicula: number): Observable<PeliculaApi> {
+    return this.http.get<PeliculaApi>(
       this.urlPelicula + '/' + idPelicula + '?language=es-ES',
       { headers: this.headersAuthoritation },
     );
   }
 
-  public guardarPeliculaBbdd(pelicula: Pelicula) {
+  public guardarPeliculaBbdd(pelicula: PeliculaApi) {
     return this.http.post(this.urlPeliculaBbdd + '/agregar', pelicula);
   }
 }
