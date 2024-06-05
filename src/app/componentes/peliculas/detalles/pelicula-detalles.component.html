@@ -1,71 +1,78 @@
-<div class="w-4/5 m-auto h-full p-4">
-  <div
-    class="bg-secondary flex text-white rounded-lg shadow-lg overflow-hidden"
-  >
-    <img
-      src="{{ urlImagenes }}{{ detallesPelicula.rutaPoster }}"
-      alt=""
-      class="w-52 object-cover"
-    />
-    <div class="flex flex-col w-[50rem] gap-10 px-20 py-5">
-      <h1 class="text-4xl font-bold mb-3">{{ detallesPelicula.titulo }}</h1>
-      <p class="mb-4">{{ detallesPelicula.resumen }}</p>
-      <div class="flex flex-wrap gap-3 mb-4">
-        @for (genero of detallesPelicula.generos; track detallesPelicula.id) {
-          <span class="bg-tertiary-steel text-white py-1 px-3 rounded-full">{{
-            genero.nombre
+@if (detallesPelicula) {
+  <div class="w-4/5 m-auto h-full p-4">
+    <div class="bg-secondary carta-detalles-peliculas text-white rounded-lg shadow-lg">
+      <img
+        src="{{ urlImagenes }}{{ detallesPelicula.rutaPoster }}"
+        alt=""
+        class="imagen-pelicula"
+      />
+      <div class="flex flex-col gap-10 px-20 py-5">
+        <h1 class="text-4xl font-bold mb-3">{{ detallesPelicula.titulo }}</h1>
+        <p class="mb-4">{{ detallesPelicula.resumen }}</p>
+        <div class="flex flex-wrap gap-3 mb-4">
+          @for (genero of detallesPelicula.generos; track detallesPelicula.id) {
+            <span class="bg-tertiary-steel text-white py-1 px-3 rounded-full">{{
+              genero.nombre
+            }}</span>
+          }
+          <span class="bg-gray-700 text-white py-1 px-3 rounded-full">{{
+            detallesPelicula.fechaEstreno
           }}</span>
-        }
-        <span class="bg-gray-700 text-white py-1 px-3 rounded-full">{{
-          detallesPelicula.fechaEstreno
-        }}</span>
-        <span class="bg-gray-700 text-white py-1 px-3 rounded-full"
-          >Valoración: {{ detallesPelicula.promedioVotos }}</span
-        >
-        <span class="bg-gray-700 text-white py-1 px-3 rounded-full"
-          >Duración: {{ detallesPelicula.duracion }} min</span
-        >
+          <span class="bg-gray-700 text-white py-1 px-3 rounded-full"
+            >Valoración: {{ detallesPelicula.promedioVotos }}</span
+          >
+          <span class="bg-gray-700 text-white py-1 px-3 rounded-full"
+            >Duración: {{ detallesPelicula.duracion }} min</span
+          >
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="mt-8 flex justify-center">
-    <iframe
-      [src]="trailerUrl"
-      width="70%"
-      height="400"
-      frameborder="0"
-      allowfullscreen
-      class="rounded-lg shadow-lg"
-    ></iframe>
-  </div>
-  <div class="overflow-x-auto flex mt-8 space-x-4 pb-4">
-    @for (fecha of fechasSesiones; track $index) {
-      <button
-        (click)="obtenerSesionesPorFecha(fecha, detallesPelicula.id)"
-        class="bg-primary text-white border border-dark min-w-40 h-20 rounded-lg shadow-md hover:bg-secondary transition"
-        [ngClass]="{ 'bg-secondary': fecha === fechaElegida }"
-      >
-        {{ fecha }}
-      </button>
+    <div class="mt-8 flex justify-center">
+      <iframe
+        [src]="trailerUrl"
+        width="70%"
+        height="400"
+        frameborder="0"
+        allowfullscreen
+        class="rounded-lg shadow-lg"
+      ></iframe>
+    </div>
+
+    <div class="flex mt-8 justify-center items-center pb-4">
+      <a class="" role="button" (click)="navegar(-1)">
+        <span class="flecha-izquierda-carousel" aria-hidden="true">bbbbbb</span>
+      </a>
+      @for (fecha of fechasSlider; track $index) {
+        <button
+          (click)="obtenerSesionesPorFecha(fecha, detallesPelicula.id)"
+          class="bg-primary text-white border border-dark min-w-40 h-20 rounded-lg shadow-md hover:bg-secondary transition"
+          [ngClass]="{ 'bg-secondary': fecha === fechaElegida }"
+        >
+          {{ fecha }}
+        </button>
+      }
+      <a class="" role="button" (click)="navegar(1)">
+        <span class="flecha-derecha-carousel" aria-hidden="true">aaaaaa</span>
+      </a>
+    </div>
+
+    @if (sesionesPorFecha) {
+      <div class="flex flex-col items-center mt-8 pb-10">
+        <h1 class="text-2xl font-bold mb-2">ELIGE LA MEJOR HORA</h1>
+        <h1 class="text-xl font-semibold mb-4">Fecha: {{ fechaElegida }}</h1>
+        <div class="flex gap-4 flex-wrap justify-center">
+          @for (sesion of sesionesPorFecha; track sesion.id) {
+            <button
+              class="w-40 h-20 bg-primary text-white flex flex-col items-center justify-center rounded-lg shadow-md hover:bg-terciario transition"
+              routerLink="/reservaSesion/{{ sesion.id }}"
+            >
+              <p class="text-lg">{{ sesion.horaInicio }}</p>
+              <p class="text-md">{{ sesion.precio }}€</p>
+            </button>
+          }
+        </div>
+      </div>
     }
   </div>
-
-  @if (sesionesPorFecha) {
-    <div class="flex flex-col items-center mt-8 pb-10">
-      <h1 class="text-2xl font-bold mb-2">ELIGE LA MEJOR HORA</h1>
-      <h1 class="text-xl font-semibold mb-4">Fecha: {{ fechaElegida }}</h1>
-      <div class="flex gap-4 flex-wrap justify-center">
-        @for (sesion of sesionesPorFecha; track sesion.id) {
-          <button
-            class="w-40 h-20 bg-primary text-white flex flex-col items-center justify-center rounded-lg shadow-md hover:bg-terciario transition"
-            routerLink="/reservaSesion/{{ sesion.id }}"
-          >
-            <p class="text-lg">{{ sesion.horaInicio }}</p>
-            <p class="text-md">{{ sesion.precio }}€</p>
-          </button>
-        }
-      </div>
-    </div>
-  }
-</div>
+}

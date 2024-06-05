@@ -32,7 +32,7 @@ export class CompraEntradaComponent implements OnInit, OnDestroy {
     }
     this.entradas = data ? JSON.parse(data) : null;
     this.entradas.forEach((entrada) => {
-      this.totalCompra = this.totalCompra + entrada.precio;
+      this.totalCompra += entrada.precio;
     });
 
     const tiempoSesion = localStorage.getItem('tiempoSesion');

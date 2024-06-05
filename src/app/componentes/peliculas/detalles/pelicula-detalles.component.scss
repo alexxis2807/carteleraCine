@@ -1,26 +1,24 @@
-dialog {
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  max-width: 500px;
-  width: 80%;
+.flecha-izquierda-carousel {
+  content: url("/assets/imagenes/flecha-izqd.png");
 }
-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
+
+.flecha-derecha-carousel {
+  content: url("/assets/imagenes/flecha-dcha.png");
 }
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+
+.carta-detalles-peliculas {
+  @apply flex;
 }
-.modal-header h2 {
-  margin: 0;
+
+.imagen-pelicula {
+  @apply w-52 rounded-l-lg ;
 }
-.close-button {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
+
+@media screen and (max-width: 900px) {
+  .carta-detalles-peliculas {
+    @apply flex-col items-center pt-5;
+  }
+  .imagen-pelicula{
+    @apply w-60 rounded-md;
+  }
 }

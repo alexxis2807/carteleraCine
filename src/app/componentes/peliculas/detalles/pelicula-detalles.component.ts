@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { PeliculasService } from '../../../servicios/peliculas.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { environment } from '../../../../assets/environments';
@@ -17,14 +17,16 @@ import { CommonModule } from '@angular/common';
 export class PeliculaDetallesComponent implements OnInit {
   urlImagenes = environment.urlApiImagenes;
 
-  modalActivado = false;
-
   idPelicula!: number;
   detallesPelicula!: Pelicula;
   trailerUrl!: SafeResourceUrl;
   fechasSesiones!: string[];
   sesionesPorFecha!: SesionPelicula[];
   fechaElegida!: string;
+
+  indiceActual = 0;
+  fechasSlider: string[] = [];
+  numeroSlider = 5;
 
   constructor(
     private peliculasServicio: PeliculasService,
@@ -39,8 +41,10 @@ export class PeliculaDetallesComponent implements OnInit {
       .obtenerDetallesPelicula(this.idPelicula)
       .subscribe((data) => {
         this.detallesPelicula = data;
-        this.obtenerURLSegura();
-        this.obtenerFechasSesiones(data.id);
+        if (this.detallesPelicula) {
+          this.obtenerURLSegura();
+          this.obtenerFechasSesiones(data.id);
+        }
       });
   }
 
@@ -62,6 +66,7 @@ export class PeliculaDetallesComponent implements OnInit {
             this.fechasSesiones[0],
             this.detallesPelicula.id,
           );
+          this.actualizarFechasSlider();
         },
       });
   }
@@ -75,5 +80,46 @@ export class PeliculaDetallesComponent implements OnInit {
           this.fechaElegida = fecha;
         },
       });
+  }
+
+  obtenerSiguientesFechas(indiceActual: number): string[] {
+    const siguientesFechas = [];
+    for (let i = 0; i < this.numeroSlider; i++) {
+      const siguienteIndice = (indiceActual + i) % this.fechasSesiones.length;
+      siguientesFechas.push(this.fechasSesiones[siguienteIndice]);
+    }
+    return siguientesFechas;
+  }
+
+  navegar(direccion: number) {
+    this.indiceActual =
+      (this.indiceActual + direccion + this.fechasSesiones.length) %
+      this.fechasSesiones.length;
+    this.actualizarFechasSlider();
+  }
+
+  actualizarFechasSlider() {
+    this.fechasSlider = this.obtenerSiguientesFechas(this.indiceActual);
+  }
+
+  @HostListener('window:resize')
+  @HostListener('window:scroll')
+  reajustarSlider() {
+    const numeroSliderActual = this.numeroSlider;
+    if (window.innerWidth <= 450) {
+      this.numeroSlider = 1;
+    } else if (window.innerWidth <= 600) {
+      this.numeroSlider = 2;
+    } else if (window.innerWidth <= 750) {
+      this.numeroSlider = 3;
+    } else if (window.innerWidth <= 900) {
+      this.numeroSlider = 4;
+    } else {
+      this.numeroSlider = 5;
+    }
+    if (this.numeroSlider != numeroSliderActual) {
+      console.log('entro');
+      this.actualizarFechasSlider();
+    }
   }
 }

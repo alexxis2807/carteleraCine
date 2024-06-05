@@ -53,7 +53,7 @@ export class SesionPeliculaComponent implements OnInit {
       } else {
         this.asientosElegidos.push(asiento);
       }
-      if (this.asientosElegidos.length > 10) {
+      if (this.asientosElegidos.length > 5) {
         this.asientosElegidos.splice(0, 1);
       }
     }
