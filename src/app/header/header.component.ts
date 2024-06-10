@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('token') && localStorage.getItem("Username")) {
       this.haySesion = true;
     }
   }

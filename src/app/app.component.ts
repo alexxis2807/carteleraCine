@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   title = 'CarteleraCine';
 
   ngOnInit() {
+
     window.addEventListener('storage', (event) => {
       if (event.key === 'sessionCerrada') {
         localStorage.removeItem('token');

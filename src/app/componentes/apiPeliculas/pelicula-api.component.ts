@@ -44,7 +44,7 @@ export class PeliculaApiComponent implements OnInit {
     });
   }
 
-  private procesarPeliculas(peliculas: any[]): void {
+  private procesarPeliculas(peliculas: Pelicula[]): void {
     peliculas.forEach((pelicula) => {
       if (this.horaEsValida()) {
         this.procesarPelicula(pelicula);
@@ -136,7 +136,7 @@ export class PeliculaApiComponent implements OnInit {
     return Math.floor(Math.random() * (12 - 6)) + 6.99;
   }
 
-  /* ngOnInit(): void {
+ /*  ngOnInit(): void {
     for (let index = 1; index <= 5; index++) {
       this.apiService.obtenerPeliculasApi(index).subscribe({
         next: (peliculas) => {

@@ -54,7 +54,7 @@ export class CompraEntradaComponent implements OnInit, OnDestroy {
     this.comenzarTiempoSesion();
   }
 
-  cancelarEntradas() {
+  cancelarEntradas(): void {
     this.entradas.forEach((entrada) => {
       this.entradaServicio.eliminarEntrada(entrada.id).subscribe();
     });
@@ -66,7 +66,7 @@ export class CompraEntradaComponent implements OnInit, OnDestroy {
       '/reservaSesion/' + this.entradas[0].sesionPelicula.id;
   }
 
-  async realizarCompra() {
+  async realizarCompra(): Promise<void> {
     const nombreUsuario = localStorage.getItem('Username');
     if (nombreUsuario != null) {
       const promesas = this.entradas.map((entrada) =>
@@ -91,7 +91,7 @@ export class CompraEntradaComponent implements OnInit, OnDestroy {
     }
   }
 
-  comenzarTiempoSesion() {
+  comenzarTiempoSesion(): void {
     this.interval = setInterval(() => {
       this.tiempoSesion--;
 
@@ -101,13 +101,14 @@ export class CompraEntradaComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  sesionExpirada() {
+  sesionExpirada(): void {
     clearInterval(this.interval);
     localStorage.removeItem('tiempoSesion');
     localStorage.removeItem('entradasEnProceso');
     this.cancelarEntradas();
     alert('Sesión finalizada. Vas a ser redirigido');
   }
+  
   get minutes(): number {
     return Math.floor(this.tiempoSesion / 60);
   }

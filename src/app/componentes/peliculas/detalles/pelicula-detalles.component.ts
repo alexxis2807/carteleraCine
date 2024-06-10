@@ -48,18 +48,19 @@ export class PeliculaDetallesComponent implements OnInit {
       });
   }
 
-  obtenerURLSegura() {
+  obtenerURLSegura(): void {
     this.trailerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
       'https://www.youtube.com/embed/' + this.detallesPelicula.rutaTrailer,
     );
   }
 
-  obtenerFechasSesiones(idPelicula: number) {
+  obtenerFechasSesiones(idPelicula: number): void {
     this.sesionPeliculaServicio
       .obtenerFechasSesionesPeliculas(idPelicula)
       .subscribe({
         next: (fechas) => {
           this.fechasSesiones = fechas;
+          console.log(this.fechasSesiones)
         },
         complete: () => {
           this.obtenerSesionesPorFecha(
@@ -71,7 +72,7 @@ export class PeliculaDetallesComponent implements OnInit {
       });
   }
 
-  obtenerSesionesPorFecha(fecha: string, idPelicula: number) {
+  obtenerSesionesPorFecha(fecha: string, idPelicula: number): void {
     this.sesionPeliculaServicio
       .obtenerSesionesPeliculaFecha(fecha, idPelicula)
       .subscribe({
@@ -91,20 +92,20 @@ export class PeliculaDetallesComponent implements OnInit {
     return siguientesFechas;
   }
 
-  navegar(direccion: number) {
+  navegar(direccion: number): void {
     this.indiceActual =
       (this.indiceActual + direccion + this.fechasSesiones.length) %
       this.fechasSesiones.length;
     this.actualizarFechasSlider();
   }
 
-  actualizarFechasSlider() {
+  actualizarFechasSlider(): void {
     this.fechasSlider = this.obtenerSiguientesFechas(this.indiceActual);
   }
 
   @HostListener('window:resize')
   @HostListener('window:scroll')
-  reajustarSlider() {
+  reajustarSlider(): void {
     const numeroSliderActual = this.numeroSlider;
     if (window.innerWidth <= 450) {
       this.numeroSlider = 1;
