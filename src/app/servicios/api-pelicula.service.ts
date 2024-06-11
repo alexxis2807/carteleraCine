@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../assets/environments';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
-import { PeliculaApi, Pelicula } from '../interfaces';
+import { PeliculaApi, Pelicula, PeliculaApiResultado } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -20,9 +20,9 @@ export class ApiPeliculaService {
 
   constructor(private http: HttpClient) {}
 
-  public obtenerPeliculasApi(pagina: number): Observable<any> {
+  public obtenerPeliculasApi(pagina: number): Observable<PeliculaApi[]> {
     return this.http
-      .get<any>(
+      .get<PeliculaApiResultado>(
         this.urlDiscover +
           '?include_adult=false&include_video=false&language=es-ES&page=' +
           pagina +

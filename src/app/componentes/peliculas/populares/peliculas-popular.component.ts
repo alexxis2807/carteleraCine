@@ -12,9 +12,7 @@ import { PeliculaComponent } from '../cartaPelicula/pelicula.component';
 })
 export class PeliculasPopularComponent implements OnInit {
   peliculas!: DetallePoster[];
-
-  portadas = [];
-
+  
   constructor(private peliculaService: PeliculasService) {}
 
   ngOnInit(): void {

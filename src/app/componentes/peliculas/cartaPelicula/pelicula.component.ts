@@ -11,7 +11,6 @@ import { RouterModule } from '@angular/router';
 })
 export class PeliculaComponent {
   urlImagenes = environment.urlApiImagenes;
-
   @Input() urlPortadaPelicula!: string;
   @Input() tituloPelicula!: string;
   @Input() idPelicula!: number;

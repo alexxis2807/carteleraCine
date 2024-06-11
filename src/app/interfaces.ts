@@ -6,13 +6,6 @@ export interface Usuario {
   fecha_registro: string;
   fecha_modificacion: string;
 }
-
-export interface DetallePoster {
-  id: number;
-  titulo: string;
-  rutaPoster: string;
-}
-
 export interface PeliculaApi {
   id: number;
   adult: boolean;
@@ -31,6 +24,31 @@ export interface PeliculaApi {
   trailer_path: string;
   runtime: number;
 }
+
+export interface SesionPelicula {
+  id: number;
+  pelicula: Pelicula;
+  sala: Sala;
+  fecha: string;
+  horaInicio: string;
+  horaFin: string;
+  precio: number;
+}
+
+export interface Entrada {
+  id: number;
+  sesionPelicula: SesionPelicula;
+  numeroAsiento: number;
+  usuario: Usuario;
+  precio: number;
+}
+
+export interface DetallePoster {
+  id: number;
+  titulo: string;
+  rutaPoster: string;
+}
+
 
 export interface Genero {
   id: number;
@@ -72,27 +90,19 @@ export interface SesionPeliculaRequest {
   precio: number;
 }
 
-export interface SesionPelicula {
-  id: number;
-  pelicula: Pelicula;
-  sala: Sala;
-  fecha: string;
-  horaInicio: string;
-  horaFin: string;
-  precio: number;
-}
 
-export interface Entrada {
-  id: number;
-  sesionPelicula: SesionPelicula;
-  numeroAsiento: number;
-  usuario: Usuario;
-  precio: number;
-}
 
 export interface EntradaRequest {
   idSesion: number;
   asientos: number[];
   nombreUsuario: string;
   precio: number;
+}
+
+
+export interface PeliculaApiResultado {
+	page: number;
+	results: PeliculaApi[];
+	total_pages: number;
+	total_results: number;
 }

@@ -12,42 +12,14 @@ import { AuthGuard } from './authGuard';
 import { MisEntradasComponent } from './componentes/usuario/misEntrada/mis-entradas.component';
 
 export const routes: Routes = [
-  //{ path: 'FormularioUsuario', component: FormUsuarioComponent },
   { path: 'registro', component: RegistraUsuarioComponent },
   { path: 'inicioSesion', component: FormInicioSesionComponent },
-  {
-    path: 'peliculas/populares',
-    component: PeliculasPopularComponent,
-    canActivate: [AuthGuard],
-  },
-  { path: 'peliculas/api', component: PeliculaApiComponent },
-  {
-    path: 'peliculas',
-    component: TodasPeliculasComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'peliculas/detalles/:idPelicula',
-    component: PeliculaDetallesComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'reservaSesion/:idSesion',
-    component: SesionPeliculaComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'compraEntrada',
-    component: CompraEntradaComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'misEntradas',
-    component: MisEntradasComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "**",
-    redirectTo: "/peliculas"
-  }
+  { path: 'peliculas/populares', component: PeliculasPopularComponent, canActivate: [AuthGuard],},
+  //{ path: 'peliculas/api', component: PeliculaApiComponent },
+  {path: 'peliculas', component: TodasPeliculasComponent, canActivate: [AuthGuard] },
+  { path: 'peliculas/detalles/:idPelicula', component: PeliculaDetallesComponent, canActivate: [AuthGuard] },
+  { path: 'reservaSesion/:idSesion', component: SesionPeliculaComponent, canActivate: [AuthGuard] },
+  { path: 'compraEntrada', component: CompraEntradaComponent, canActivate: [AuthGuard] },
+  { path: 'misEntradas', component: MisEntradasComponent, canActivate: [AuthGuard] },
+  { path: "**", redirectTo: "/peliculas" }
 ];

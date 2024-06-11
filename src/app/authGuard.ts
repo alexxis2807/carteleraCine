@@ -38,7 +38,7 @@ export class authGuard {
     if (!localStorage.getItem('token') || !localStorage.getItem('Username')) {
       localStorage.removeItem('token');
       localStorage.removeItem('Username');
-      window.location.href = 'inicioSesion';
+      this.route.navigateByUrl('inicioSesion');
       return false;
     }
     try {
@@ -49,7 +49,7 @@ export class authGuard {
     if (!this.tokenValido) {
       localStorage.removeItem('token');
       localStorage.removeItem('Username');
-      window.location.href = 'inicioSesion';
+      this.route.navigateByUrl('inicioSesion');
     }
 
     return this.tokenValido;

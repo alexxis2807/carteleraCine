@@ -19,12 +19,33 @@ export class PeliculaApiComponent implements OnInit {
     private sesionPeliculaServicio: SesionPeliculaService,
     private salaServicio: SalaService,
   ) {}
-
+  ngOnInit(): void {
+    for (let index = 1; index <= 5; index++) {
+      this.apiService.obtenerPeliculasApi(index).subscribe({
+        next: (peliculas) => {
+          peliculas.forEach((pelicula: PeliculaApi) => {
+            this.apiService.obtenerDetallesPelicula(pelicula.id).subscribe({
+              next: (peli) => {
+                this.apiService.obtenerTrailerPelicula(peli.id).subscribe({
+                  next: (trailer) => {
+                    peli.trailer_path = trailer;
+                    if (peli.runtime > 0) {
+                      this.apiService.guardarPeliculaBbdd(peli).subscribe({
+                        next: (peliculaGuardada) => {
+                          console.log(peliculaGuardada);
+                        },
+                        error: (err) => {
+                          console.log(err);
+                        },
+                      });
+                    }
+                  },});},});});},});}
+  }
   fechaActual = new Date('2024-06-11T09:00:00Z');
   fechaFinal = new Date('2024-06-12T23:59:59Z');
   sala = 1;
 
-  ngOnInit(): void {
+  ngOnInity(): void {
     this.peliculaServicio.obtenerPeliculas().subscribe({
       next: (peliculas) => {
         console.log(peliculas.length);
@@ -66,7 +87,7 @@ export class PeliculaApiComponent implements OnInit {
     );
   }
 
-  private procesarPelicula(pelicula: any): void {
+  private procesarPelicula(pelicula: Pelicula): void {
     const horaInicio = this.obtenerHoraActual();
     const fecha = this.obtenerFechaActual();
 
@@ -136,33 +157,5 @@ export class PeliculaApiComponent implements OnInit {
     return Math.floor(Math.random() * (12 - 6)) + 6.99;
   }
 
- /*  ngOnInit(): void {
-    for (let index = 1; index <= 5; index++) {
-      this.apiService.obtenerPeliculasApi(index).subscribe({
-        next: (peliculas) => {
-          peliculas.forEach((pelicula: PeliculaApi) => {
-            this.apiService.obtenerDetallesPelicula(pelicula.id).subscribe({
-              next: (peli) => {
-                this.apiService.obtenerTrailerPelicula(peli.id).subscribe({
-                  next: (trailer) => {
-                    peli.trailer_path = trailer;
-                    if (peli.runtime > 0) {
-                      this.apiService.guardarPeliculaBbdd(peli).subscribe({
-                        next: (peliculaGuardada) => {
-                          console.log(peliculaGuardada);
-                        },
-                        error: (err) => {
-                          console.log('error');
-                        },
-                      });
-                    }
-                  },
-                });
-              },
-            });
-          });
-        },
-      });
-    }
-  } */
+
 }
