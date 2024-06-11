@@ -2,7 +2,11 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { PeliculasService } from '../../../servicios/peliculas.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { environment } from '../../../../assets/environments';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import {
+  DomSanitizer,
+  SafeResourceUrl,
+  Title,
+} from '@angular/platform-browser';
 import { Pelicula, SesionPelicula } from '../../../interfaces';
 import { SesionPeliculaService } from '../../../servicios/sesion-pelicula.service';
 import { CommonModule } from '@angular/common';
@@ -33,9 +37,11 @@ export class PeliculaDetallesComponent implements OnInit {
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private sesionPeliculaServicio: SesionPeliculaService,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle('Detalles');
     this.idPelicula = Number(this.route.snapshot.paramMap.get('idPelicula'));
     this.peliculasServicio
       .obtenerDetallesPelicula(this.idPelicula)
@@ -60,7 +66,7 @@ export class PeliculaDetallesComponent implements OnInit {
       .subscribe({
         next: (fechas) => {
           this.fechasSesiones = fechas;
-          console.log(this.fechasSesiones)
+          console.log(this.fechasSesiones);
         },
         complete: () => {
           this.obtenerSesionesPorFecha(

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Entrada } from '../../interfaces';
 import { CommonModule } from '@angular/common';
 import { EntradaService } from '../../servicios/entrada.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-compra-entrada',
@@ -23,9 +24,11 @@ export class CompraEntradaComponent implements OnInit, OnDestroy {
   constructor(
     private entradaServicio: EntradaService,
     private router: Router,
+    private titleService: Title,
   ) {}
 
   ngOnInit() {
+    this.titleService.setTitle('Compra Entrada');
     const data = localStorage.getItem('entradasEnProceso');
     if (data == null) {
       this.router.navigateByUrl('/peliculas');
@@ -108,7 +111,7 @@ export class CompraEntradaComponent implements OnInit, OnDestroy {
     this.cancelarEntradas();
     alert('Sesión finalizada. Vas a ser redirigido');
   }
-  
+
   get minutes(): number {
     return Math.floor(this.tiempoSesion / 60);
   }

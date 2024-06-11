@@ -2,6 +2,7 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,9 @@ export class AppComponent implements OnDestroy {
     localStorage.clear();
   }
   title = 'CarteleraCine';
-
+  constructor(private titleService: Title) {
+    this.titleService.setTitle('Cartelera Cine');
+  }
   @HostListener('window:storage', ['$event'])
   onEventoStorage(event: StorageEvent) {
     if (event.key === 'sessionCerrada') {

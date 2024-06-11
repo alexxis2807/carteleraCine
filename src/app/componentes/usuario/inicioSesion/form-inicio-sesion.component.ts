@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { UsuarioService } from '../../../servicios/usuario.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-form-inicio-sesion',
@@ -21,13 +22,14 @@ export class FormInicioSesionComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('token') && localStorage.getItem('Username')) {
       window.location.href = '/peliculas';
     }
-
+    this.titleService.setTitle('Inicio Sesión');
     this.formInicio = this.fb.group({
       nombreUsuario: ['', Validators.required],
       contraseña: ['', Validators.required],

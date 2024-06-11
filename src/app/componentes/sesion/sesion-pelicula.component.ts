@@ -5,6 +5,7 @@ import { SesionPeliculaService } from '../../servicios/sesion-pelicula.service';
 import { CommonModule } from '@angular/common';
 import { EntradaService } from '../../servicios/entrada.service';
 import { environment } from '../../../assets/environments';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sesion-pelicula',
@@ -26,9 +27,11 @@ export class SesionPeliculaComponent implements OnInit {
     private sesionPeliculaServicio: SesionPeliculaService,
     private entradaServicio: EntradaService,
     private router: Router,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle('Asientos');
     this.idSesion = Number(this.route.snapshot.paramMap.get('idSesion'));
     this.sesionPeliculaServicio.obtenerSesionPelicula(this.idSesion).subscribe({
       next: (sesion) => {

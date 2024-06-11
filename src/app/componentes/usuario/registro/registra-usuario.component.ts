@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { FormUsuarioComponent } from '../formularioUsuario/form-usuario.component';
 import { UsuarioService } from '../../../servicios/usuario.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-registra-usuario',
@@ -25,12 +26,15 @@ export class RegistraUsuarioComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('token') && localStorage.getItem('Username')) {
       window.location.href = '/peliculas';
     }
+    this.titleService.setTitle('Registro');
+
     this.formUsuario = this.fb.group({
       nombreUsuario: ['', Validators.required],
       contraseña: ['', Validators.required],

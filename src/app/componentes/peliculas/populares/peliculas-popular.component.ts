@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PeliculasService } from '../../../servicios/peliculas.service';
 import { DetallePoster, PeliculaApi } from '../../../interfaces';
 import { PeliculaComponent } from '../cartaPelicula/pelicula.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-peliculas-popular',
@@ -12,10 +13,14 @@ import { PeliculaComponent } from '../cartaPelicula/pelicula.component';
 })
 export class PeliculasPopularComponent implements OnInit {
   peliculas!: DetallePoster[];
-  
-  constructor(private peliculaService: PeliculasService) {}
+
+  constructor(
+    private peliculaService: PeliculasService,
+    private titleService: Title,
+  ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle('Populares');
     this.peliculaService
       .obtenerPosterPeliculasPopulares()
       .subscribe((pelis) => (this.peliculas = pelis));
