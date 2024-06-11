@@ -26,7 +26,6 @@ export class MisEntradasComponent implements OnInit {
     this.entradaServicio.obtenerEntradasUsuario(this.nombreUsuario).subscribe({
       next: (entradas) => {
         this.entradasUsuario = entradas;
-        console.log(this.entradasUsuario);
       },
     });
   }

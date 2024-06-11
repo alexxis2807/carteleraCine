@@ -69,7 +69,6 @@ export class PeliculaDetallesComponent implements OnInit {
       .subscribe({
         next: (fechas) => {
           this.fechasSesiones = fechas;
-          console.log(this.fechasSesiones);
         },
         complete: () => {
           this.obtenerSesionesPorFecha(
@@ -128,7 +127,6 @@ export class PeliculaDetallesComponent implements OnInit {
       this.numeroSlider = 5;
     }
     if (this.numeroSlider != numeroSliderActual) {
-      console.log('entro');
       this.actualizarFechasSlider();
     }
   }
