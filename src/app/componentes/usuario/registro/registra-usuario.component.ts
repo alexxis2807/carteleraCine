@@ -63,7 +63,11 @@ export class RegistraUsuarioComponent implements OnInit {
         });
       }
     } else {
-      this.error = 'Todos los campos son obligatorios';
+      if (this.formUsuario.get('correo')?.errors) {
+        this.error = 'Formato de email inválido';
+      } else {
+        this.error = 'Todos los campos son obligatorios';
+      }
     }
   };
 }
