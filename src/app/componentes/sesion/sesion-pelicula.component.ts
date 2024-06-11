@@ -37,6 +37,9 @@ export class SesionPeliculaComponent implements OnInit {
       next: (sesion) => {
         this.sesionPelicula = sesion;
       },
+      error: (err) => {
+        this.router.navigateByUrl('peliculas');
+      },
     });
     this.sesionPeliculaServicio
       .obtenerAsientosOcupados(this.idSesion)

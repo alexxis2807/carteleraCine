@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { PeliculasService } from '../../../servicios/peliculas.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { environment } from '../../../../assets/environments';
 import {
   DomSanitizer,
@@ -38,6 +38,7 @@ export class PeliculaDetallesComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private sesionPeliculaServicio: SesionPeliculaService,
     private titleService: Title,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +51,8 @@ export class PeliculaDetallesComponent implements OnInit {
         if (this.detallesPelicula) {
           this.obtenerURLSegura();
           this.obtenerFechasSesiones(data.id);
+        } else {
+          this.router.navigateByUrl('peliculas');
         }
       });
   }
