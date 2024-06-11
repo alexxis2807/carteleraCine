@@ -51,8 +51,7 @@ export class PeliculaDetallesComponent implements OnInit {
         if (this.detallesPelicula) {
           this.obtenerURLSegura();
           this.obtenerFechasSesiones(data.id);
-        } else {
-          this.router.navigateByUrl('peliculas');
+          console.log('si');
         }
       });
   }
